@@ -3,11 +3,15 @@ const APP = {
     PORT: 5678,
 }
 
-const DATABASE = {
-
+const MONGODB = {
+    HOST: 'localhost',
+    PORT: '27017',
+    DATABASE: {
+        NAME: 'aQuiz',
+    },
 }
 
 export {
     APP,
-    DATABASE,
+    MONGODB,
 }
