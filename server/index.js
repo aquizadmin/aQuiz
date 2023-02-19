@@ -1,17 +1,10 @@
 import { APP } from "./config/index.js";
 import express from 'express';
 
-// middlewares
-import mockResponse from "./middleware/mochResponse.js";
-
 const app = express();
-app.use(express.json());
 
-app.use(mockResponse);
-
-app.use('*', (req, res) => {
-    res.sendStatus(404);
-    res.end();
+app.get('/', (req, res) => {
+    res.send('It works');
 })
 
 app.listen(APP.PORT, APP.HOST, () => {
