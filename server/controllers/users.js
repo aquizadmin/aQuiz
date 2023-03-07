@@ -14,5 +14,5 @@ const createUser = (req, res) => {
 
 export default {
     getUserByID,
-    createUser
+    createUser,
 }
