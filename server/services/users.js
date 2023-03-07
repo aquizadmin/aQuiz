@@ -1,7 +1,7 @@
 import usersModel from '../database/models/users.js';
 
-const getUserById = ({_id}) => {
-    return usersModel.findOne({_id});
+const getUser = ({find, select} = {}) => {
+    return usersModel.findOne(find).select(select);
 }
 
 const createUser = ({firstName, lastName, email, password}) => {
@@ -15,6 +15,6 @@ const createUser = ({firstName, lastName, email, password}) => {
 }
 
 export default {
-    getUserById,
+    getUser,
     createUser,
 }

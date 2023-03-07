@@ -10,19 +10,12 @@ const authenticate = async (req, res, next) => {
     }
 
     const userID = JWT.decodeAccessToken(token);
-    if (userID) {
-        usersService.getUserById({_id: userID})
-            .then((user) => {
-                req.user = user;
-                next();
-            })
-            .catch((error) => {
-                console.log(error);
-                return res.sendStatus(500);
-            })
-    } else {
-        return res.sendStatus(403)
-    }
+    if (!userID) return res.sendStatus(403);
+    const find = {_id: userID};
+    const user = await usersService.getUser(find);
+    if (!user) return res.sendStatus(500);
+    req.user = user;
+    next();
 }
 
 export default {
