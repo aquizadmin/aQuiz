@@ -17,8 +17,13 @@ const JWT = {
     EXPIRED_IN_REMEMBER_ME: 60 * 60 * 24 * 7, // one week
 }
 
+const PASSWORD = {
+    MD5SECRET: "VeryImportantSecret",
+}
+
 export {
     APP,
     MONGODB,
     JWT,
+    PASSWORD,
 }

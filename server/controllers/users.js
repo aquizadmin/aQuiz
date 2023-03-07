@@ -1,18 +1,11 @@
 import usersService from '../services/users.js';
 
 const getUserByID = async (req, res) => {
-    const userID = req.params.id;
-    const user = await usersService.getUserById({_id: userID});
+    const find = {_id: req.params.id}
+    const user = await usersService.getUser({find});
     res.json(user);
-}
-
-const createUser = (req, res) => {
-    const {firstName, lastName, email, password} = req.body;
-    const newUser = usersService.createUser({firstName, lastName, email, password});
-    res.json(newUser);
 }
 
 export default {
     getUserByID,
-    createUser,
 }
