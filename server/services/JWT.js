@@ -2,24 +2,28 @@ import { JWT } from "../config/index.js";
 import jwt from "jsonwebtoken";
 
 /**
- * @description = Create JWT token
- * @param payload {*} - The payload in the token
- * @param rememberMe {Boolean} - If true, the token is valid for a week, otherwise an hour
+ * @description - Create JWT access token
+ * @param payload {Object<id: string, rememberMe: Boolean>} - The payload in the token
  */
-const generateAccessToken = (payload, rememberMe) => {
-    const expiresIn = rememberMe ? JWT.EXPIRED_IN_REMEMBER_ME : JWT.EXPIRED_IN_DEFAULT;
-    return jwt.sign(payload, JWT.SECRET, { expiresIn });
+const generateAccessToken = (payload) => {
+    const expiresIn = payload.rememberMe ? JWT.ACCESS_TOKEN.EXPIRED_IN_REMEMBER_ME : JWT.ACCESS_TOKEN.EXPIRED_IN_DEFAULT;
+    return jwt.sign(payload, JWT.ACCESS_TOKEN.SECRET, { expiresIn });
 }
 
-const decodeAccessToken = (token) => {
+const decodeAccessToken = (token, options = {}) => {
+    const result = {
+        payload: null,
+        error: null,
+    }
+
     try {
-        return jwt.verify(token, JWT.SECRET);
-    } catch (e) {
-        console.log(e);
-        return null;
+        result.payload = jwt.verify(token, JWT.ACCESS_TOKEN.SECRET, options);
+    } catch (error) {
+        result.error = error;
+    } finally {
+        return result;
     }
 }
-
 
 export default {
     generateAccessToken,
