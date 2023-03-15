@@ -23,7 +23,10 @@ const login = async (req, res) => {
     const user = await usersService.getUser({find, select});
     if (!user) return res.sendStatus(401);
 
-    const accessToken = JWT.generateAccessToken({id: user._id}, req.body.rememberMe);
+    const accessToken = JWT.generateAccessToken({
+        id: user._id,
+        rememberMe: req.body.rememberMe,
+    });
     return res.json({accessToken});
 }
 
@@ -40,7 +43,10 @@ const registration = async (req, res) => {
         password: md5Password,
     };
     const newUser = await usersService.createUser(newUserData);
-    const accessToken = JWT.generateAccessToken({id: newUser._id}, true);
+    const accessToken = JWT.generateAccessToken({
+        id: newUser._id,
+        rememberMe: true,
+    });
     return res.json({accessToken});
 }
 
