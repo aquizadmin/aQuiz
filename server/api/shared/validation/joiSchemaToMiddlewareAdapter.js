@@ -1,4 +1,4 @@
-const joiMiddleware = (schema) => {
+export default (schema) => {
     return async (req, res, next) => {
         try {
             const payload = {};
@@ -14,5 +14,3 @@ const joiMiddleware = (schema) => {
         }
     }
 }
-
-export default joiMiddleware;

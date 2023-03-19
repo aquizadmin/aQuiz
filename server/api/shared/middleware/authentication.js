@@ -1,6 +1,7 @@
-import JWTService from "../services/JWT.js";
-import { JWT } from '../config/index.js';
-import usersService from '../services/users.js';
+import JWTService from "../service/JWT.js";
+import { JWT } from '../../../config/index.js';
+import { getUser } from '../service/user.js';
+
 const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
@@ -30,7 +31,7 @@ const authenticate = async (req, res, next) => {
 
     const userID = expirationIgnoredDecodedToken.payload.id;
     const find = {_id: userID};
-    const user = await usersService.getUser(find);
+    const user = await getUser(find);
     if (!user) return res.sendStatus(500);
     req.user = user;
     next();

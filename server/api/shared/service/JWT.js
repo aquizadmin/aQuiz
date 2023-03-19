@@ -1,4 +1,4 @@
-import { JWT } from "../config/index.js";
+import { JWT } from "../../../config/index.js";
 import jwt from "jsonwebtoken";
 
 /**

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { login, registration } from "../controllers/authorization.js";
-import { loginValidation, registrationValidation } from "../validation/authorization.js";
+import { login, registration } from "./controller.js";
+import { loginValidation, registrationValidation } from "./validation.js";
 
 const authorizationRouter = Router();
 

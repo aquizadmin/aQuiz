@@ -1,4 +1,4 @@
-import joiMiddleware from "./joiToMidlewareWrapper.js";
+import joiMiddleware from "../shared/validation/joiSchemaToMiddlewareAdapter.js";
 import Joi from "joi";
 
 const loginSchema = Joi.object({

@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
-import JWT from "../services/JWT.js";
-import usersService from "../services/users.js";
+import JWT from "../shared/service/JWT.js";
+import { getUser, createUser } from "../shared/service/user.js";
 
 const generateMD5Password = (password) => {
     return createHash('md5').update(password).digest('hex')
@@ -9,7 +9,7 @@ const generateMD5Password = (password) => {
 const doesUserExists = async (email) => {
     const find = {email};
     const select = {_id: 1};
-    const user = await usersService.getUser({find, select});
+    const user = await getUser({find, select});
     return Boolean(user);
 }
 
@@ -20,7 +20,7 @@ const login = async (req, res) => {
         password: md5Password,
     };
     const select = {_id: 1};
-    const user = await usersService.getUser({find, select});
+    const user = await getUser({find, select});
     if (!user) return res.sendStatus(401);
 
     const accessToken = JWT.generateAccessToken({
@@ -42,7 +42,7 @@ const registration = async (req, res) => {
         email: req.body.email,
         password: md5Password,
     };
-    const newUser = await usersService.createUser(newUserData);
+    const newUser = await createUser(newUserData);
     const accessToken = JWT.generateAccessToken({
         id: newUser._id,
         rememberMe: true,

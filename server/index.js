@@ -1,9 +1,13 @@
-import { APP } from "./config/index.js";
-import connection from "./database/index.js";
+import { APP, MONGODB } from "./config/index.js";
+import mongoose from "mongoose";
 import express from 'express';
 
-import authorizationRouter from './routes/authorization.js';
-import usersRoutes from './routes/users.js';
+import authorizationRouter from './api/authorization/router.js';
+import usersRoutes from './api/users/router.js';
+
+await mongoose.connect(`mongodb://${MONGODB.HOST}:${MONGODB.PORT}/${MONGODB.DATABASE.NAME}`, {
+    useNewUrlParser: true,
+});
 
 const app = express();
 

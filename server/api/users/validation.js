@@ -1,4 +1,4 @@
-import joiMiddleware from "./joiToMidlewareWrapper.js";
+import joiMiddleware from "../shared/validation/joiSchemaToMiddlewareAdapter.js";
 import Joi from "joi";
 import objectId from "joi-objectid";
 Joi.objectId = objectId(Joi);
