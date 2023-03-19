@@ -1,7 +1,11 @@
-import usersController from '../controllers/users.js';
 import authentication from "../middlewares/authentication.js";
+import {
+    UserByIdValidation
+} from "../validation/users.js";
+import usersController from '../controllers/users.js';
 import { Router } from "express";
 const usersRouter = Router();
 
-usersRouter.get('/:id', authentication.authenticate,  usersController.getUserByID);
+usersRouter.use(authentication.authenticate)
+usersRouter.get('/:id', UserByIdValidation, usersController.getUserByID);
 export default usersRouter;
