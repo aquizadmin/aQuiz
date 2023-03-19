@@ -1,7 +1,6 @@
 import JWTService from "../services/JWT.js";
 import { JWT } from '../config/index.js';
 import usersService from '../services/users.js';
-import e from "express";
 const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
@@ -14,7 +13,7 @@ const authenticate = async (req, res, next) => {
     const expirationIgnoredDecodedToken = JWTService.decodeAccessToken(token, {ignoreExpiration: true});
     if (decodedToken.error && expirationIgnoredDecodedToken.error) {
         return res.sendStatus(403);
-    } else if (decodedToken.error.name === "TokenExpiredError" && expirationIgnoredDecodedToken.payload) {
+    } else if (decodedToken.error && decodedToken.error.name === "TokenExpiredError" && expirationIgnoredDecodedToken.payload) {
         const tokenExpiredAt = decodedToken.error.expiredAt;
         const canBeRefreshed = tokenExpiredAt.getTime() + JWT.ACCESS_TOKEN.REFRESHING_PERIOD > Date.now();
         if (canBeRefreshed) {
