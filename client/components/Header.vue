@@ -9,9 +9,13 @@
       <v-row>
         <v-col class="d-flex align-center justify-start">
           <v-img
-            width="44"
+            alt="Logo"
+            width="44px"
             height="44px"
             src="/logo.png"
+            lazy-src="/logo.png"
+            class="cursor-pointer"
+            @click="goToHome"
           />
         </v-col>
 
@@ -57,7 +61,10 @@ export default {
   },
   methods: {
       handleClick() {
-          console.log('button click')
+          this.$router.push('/game')
+      },
+      goToHome() {
+          this.$router.push('/')
       }
   }
 }

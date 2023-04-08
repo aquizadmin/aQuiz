@@ -1,32 +1,40 @@
 <template>
   <footer class="position-relative">
     <div class="d-flex flex-column w-100">
-      <v-container
-        class="d-flex items-center justify-center pt-10"
-        style="border-top: 1px solid rgba(231, 231, 231, 0.24)"
-      >
-        <span>
-          Get connected with us on social networks!
-        </span>
+      <v-container>
+        <v-divider
+          thickness="2px"
+          color="rgba(231, 231, 231, 0.24)"
+        />
 
-        <v-spacer />
+        <div class="d-flex items-center justify-center pt-10">
+          <span>
+            Get connected with us on social networks!
+          </span>
 
-        <div
-          class="d-flex items-center"
-          style="z-index: 2"
-        >
-          <v-btn
-            v-for="(icon, index) in icons"
-            :key="icon"
-            :class="index + 1 === icons.length ? 'ml-4' : 'mx-4'"
-            :icon="icon"
-            variant="plain"
-            size="small"
-          />
+          <v-spacer />
+
+          <div
+            class="d-flex items-center"
+            style="z-index: 2"
+          >
+            <v-btn
+              v-for="(icon, index) in icons"
+              :key="icon"
+              :class="index + 1 === icons.length ? 'ml-4' : 'mx-4'"
+              :icon="icon"
+              variant="plain"
+              size="small"
+              role="link"
+              aria-label="Link"
+            />
+          </div>
         </div>
       </v-container>
 
-      <UICircleShadow style="right: 15px" />
+      <UICircleShadow
+        :right="'15px'"
+      />
 
       <div
         class="w-100 bg-secondary py-3"
