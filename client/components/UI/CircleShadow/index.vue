@@ -1,11 +1,36 @@
 <template>
-  <div class="position-absolute shadow-circle" />
+  <div
+    class="position-absolute shadow-circle"
+    :style="circleShadowStyles"
+  />
 </template>
+
+<script>
+export default {
+    props: {
+        width: {
+            type: Number,
+            default: 364,
+        },
+        right: {
+            type: [Number, String],
+            default: 0,
+        }
+    },
+    computed: {
+        circleShadowStyles() {
+            return {
+                width: `${this.width}px`,
+                right: this.right,
+            }
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .shadow-circle {
   z-index: 1;
-  width: 364px;
   height: 314px;
   max-height: -webkit-fill-available;
   filter: blur(200px);

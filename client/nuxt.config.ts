@@ -22,7 +22,7 @@ export default defineNuxtConfig({
     },
     googleFonts: {
         families: {
-            Outfit: true
+            Outfit: [300, 500, 600, 700],
         }
     }
 })
