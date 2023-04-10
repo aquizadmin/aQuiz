@@ -50,7 +50,7 @@ const registration = async (req, res) => {
     return res.json({accessToken});
 }
 
-export {
+export default {
     login,
     registration,
 }
