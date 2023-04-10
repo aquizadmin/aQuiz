@@ -1,10 +1,10 @@
-import { Router } from "express";
-import { login, registration } from "../controllers/authorization.js";
-import { loginValidation, registrationValidation } from "../validation/authorization.js";
+import authorizationController from "../controllers/authorization.js";
+import authorizationValidation from "../validation/authorization.js";
 
+import { Router } from "express";
 const authorizationRouter = Router();
 
-authorizationRouter.post('/login', loginValidation, login);
-authorizationRouter.post('/registration', registrationValidation, registration);
+authorizationRouter.post('/login', authorizationValidation.loginValidation, authorizationController.login);
+authorizationRouter.post('/registration', authorizationValidation.registrationValidation, authorizationController.registration);
 
 export default authorizationRouter;

@@ -20,7 +20,7 @@ const registrationSchema = Joi.object({
 const loginValidation = joiMiddleware(loginSchema);
 const registrationValidation = joiMiddleware(registrationSchema);
 
-export {
+export default {
     loginValidation,
     registrationValidation,
 }

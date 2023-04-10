@@ -11,6 +11,6 @@ const UserByIdSchema = Joi.object({
 
 const UserByIdValidation = joiMiddleware(UserByIdSchema);
 
-export {
+export default {
     UserByIdValidation,
 }
