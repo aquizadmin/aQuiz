@@ -4,11 +4,16 @@ const getQuestion = ({find, select} = {}) => {
     return questionsModel.findOne(find).select(select);
 }
 
+const getQuestions = ({filter, select, sort, skip, limit} = {}) => {
+    return questionsModel.find(filter).select(select).sort(sort).skip(skip).limit(limit);
+}
+
 const createQuestion = ({question, answers, correct_answer, tags, category, difficulty}) => {
     return questionsModel.create({question, answers, correct_answer, tags, category, difficulty});
 }
 
 export default {
     getQuestion,
+    getQuestions,
     createQuestion,
 }

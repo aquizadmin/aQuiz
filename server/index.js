@@ -4,7 +4,7 @@ import express from 'express';
 
 import authorizationRouter from './routes/authorization.js';
 import usersRouter from './routes/users.js';
-import questionsRouter from './routes/questions.js';
+import gameRouter from './routes/game.js';
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use('/', authorizationRouter);
 app.use('/users', usersRouter);
-app.use('/questions', questionsRouter);
+app.use('/game', gameRouter);
 
 app.listen(APP.PORT, APP.HOST, () => {
     console.log(`Server is working on http://${APP.HOST}:${APP.PORT}`);
