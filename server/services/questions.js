@@ -12,8 +12,13 @@ const createQuestion = ({question, answers, correct_answer, tags, category, diff
     return questionsModel.create({question, answers, correct_answer, tags, category, difficulty});
 }
 
+const getUniqValuesOfField = ({fieldName}) => {
+    return questionsModel.distinct(fieldName);
+}
+
 export default {
     getQuestion,
     getQuestions,
     createQuestion,
+    getUniqValuesOfField,
 }
