@@ -259,6 +259,30 @@
 			]
 		},
 		{
+			"name": "questions",
+			"item": [
+				{
+					"name": "Example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Example",
 			"request": {
 				"method": "GET",
