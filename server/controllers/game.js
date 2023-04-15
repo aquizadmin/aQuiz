@@ -11,7 +11,8 @@ const startGame = async (req, res) => {
 }
 
 const finishGame = async (req, res) => {
-    const answers = req.body.answers;
+    const allAnswers = req.body.answers;
+    const answers = allAnswers.filter((answer) => answer.answer !== -1);
     const questionIds = answers.map((question) => question._id);
     const filter = {
         _id: {$in: questionIds},
@@ -26,7 +27,7 @@ const finishGame = async (req, res) => {
         return question.correctAnswer === question.answer ? sum + 1 : sum;
     }, 0);
     res.json({
-        questionsCount: answers.length,
+        questionsCount: allAnswers.length,
         correctAnswersCount: correctAnswersCount,
         answers: answers,
     });
