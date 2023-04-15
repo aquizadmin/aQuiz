@@ -28,6 +28,7 @@ const finishGame = async (req, res) => {
     res.json({
         questionsCount: answers.length,
         correctAnswersCount: correctAnswersCount,
+        answers: answers,
     });
 }
 
