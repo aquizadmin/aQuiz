@@ -23,13 +23,13 @@
 
 <script>
 export default {
-    methods: {
-        onMouseMove(e) {
-            const mouse = document.querySelector('.mouse-shadow');
-            mouse.style.top = `${ e.y }px`
-            mouse.style.left = `${ e.x }px`
-        }
+  methods: {
+    onMouseMove(e) {
+      const mouse = document.querySelector('.mouse-shadow');
+      mouse.style.top = `${e.y}px`
+      mouse.style.left = `${e.x}px`
     }
+  }
 }
 </script>
 

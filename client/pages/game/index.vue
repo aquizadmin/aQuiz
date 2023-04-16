@@ -37,16 +37,25 @@
         </div>
 
         <v-row align="center">
-          <v-col
-            v-for="(setting, index) in settings"
-            :key="index"
-          >
+          <v-col>
             <v-select
-              v-model="formData[setting.type]"
+              v-model="formData['duration']"
               aria-selected="false"
               hide-details
-              :label="setting.label"
-              :items="setting.items"
+              label="Duration (seconds)"
+              :items="durations"
+              variant="underlined"
+              color="white"
+            />
+          </v-col>
+
+          <v-col>
+            <v-select
+              v-model="formData['category']"
+              aria-selected="false"
+              hide-details
+              label="Category"
+              :items="categories?.allCategories"
               variant="underlined"
               color="white"
             />
@@ -64,24 +73,22 @@
   </section>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        formData: {
-            duration: 30,
-            category: 'JS',
-        },
-        settings: [
-            { type: 'duration', label: 'Duration (seconds)', items: [30, 60, 90] },
-            { type: 'category',  label: 'Category', items: ['HTML', 'CSS', 'JS', 'Maths'] },
-        ]
-    }),
-    methods: {
-        handleClick() {
-            const { duration, category } = this.formData;
+<script setup>
+import {useFetchWithHeaders} from '~/hooks';
 
-            this.$router.push({ path: '/game/play', query: { duration, category } });
-        }
-    }
+const router = useRouter()
+
+const {data: categories} = useFetchWithHeaders('/questions/getAllCategories', {
+  method: 'GET',
+})
+
+const formData = ref({duration: 30, category: 'Linux'})
+const durations = ref([30, 60, 90])
+const handleClick = () => {
+  const {duration, category} = formData.value;
+
+  localStorage.removeItem('results')
+
+  router.push({path: '/game/play', query: {duration, category}});
 }
 </script>
