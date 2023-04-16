@@ -262,7 +262,7 @@
 			"name": "questions",
 			"item": [
 				{
-					"name": "Example",
+					"name": "Get all categories",
 					"request": {
 						"method": "GET",
 						"header": [],
