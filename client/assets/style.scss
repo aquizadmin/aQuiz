@@ -1,3 +1,5 @@
+@import 'variables';
+
 *,
 *:before,
 *:after {
@@ -13,6 +15,18 @@ img {
   cursor: pointer;
 }
 
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
+}
+
 .page-title {
   color: #FFFFFF;
   font-size: 64px;
@@ -22,9 +36,14 @@ img {
 }
 
 .page-gradient-title {
-  background: linear-gradient(89.62deg, #0500FA 7.09%, #E01E5A 92.23%);
+  background: $main-gradient-background;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.page-title-shadow,
+.timer-block .v-progress-circular__content {
+  text-shadow: 0 0 5px black;
 }
 
 .page-description {
@@ -53,4 +72,18 @@ img {
   font-size: 18px;
   font-weight: 300;
   line-height: 32px;
+}
+
+.active-option {
+  background: $main-gradient-background !important;
+}
+
+.inactive-option {
+  background: rgb(33, 33, 33) !important;
+}
+
+@media (min-width: 1920px) {
+  .v-container {
+    max-width: 1400px !important;
+  }
 }

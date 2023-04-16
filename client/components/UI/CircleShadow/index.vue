@@ -7,30 +7,30 @@
 
 <script>
 export default {
-    props: {
-        width: {
-            type: Number,
-            default: 364,
-        },
-        right: {
-            type: [Number, String],
-            default: 0,
-        }
+  props: {
+    width: {
+      type: Number,
+      default: 364,
     },
-    computed: {
-        circleShadowStyles() {
-            return {
-                width: `${this.width}px`,
-                right: this.right,
-            }
-        }
+    right: {
+      type: [Number, String],
+      default: 0,
     }
+  },
+  computed: {
+    circleShadowStyles() {
+      return {
+        width: `${this.width}px`,
+        right: this.right,
+      }
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .shadow-circle {
-  z-index: 1;
+  z-index: 0;
   height: 314px;
   max-height: -webkit-fill-available;
   filter: blur(200px);

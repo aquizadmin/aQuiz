@@ -12,7 +12,7 @@
           {{ gradientTitle }}
         </span>
       </h1>
-        
+
       <div class="page-description pt-5">
         {{ description }}
       </div>
@@ -26,6 +26,8 @@
         height="572"
         aspect-ratio="1"
         :lazy-src="image"
+        :cover="imageCoverFit"
+        class="ml-auto"
       />
     </v-col>
   </v-row>
@@ -38,23 +40,27 @@
 
 <script>
 export default {
-    props: {
-        title: {
-            type: String,
-            default: '',
-        },
-        gradientTitle: {
-            type: String,
-            default: '',
-        },
-        description: {
-            type: String,
-            default: '',
-        },
-        image: {
-            type: String,
-            default: '',
-        }
-    }
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    gradientTitle: {
+      type: String,
+      default: '',
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      default: '',
+    },
+    imageCoverFit: {
+      type: Boolean,
+      default: false,
+    },
+  }
 }
 </script>
