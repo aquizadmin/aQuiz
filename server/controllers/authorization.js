@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import JWT from "../services/JWT.js";
 import usersService from "../services/users.js";
+import { SuccessResponseDTO, ErrorResponseDTO } from "../DTO/index.js";
 
 const generateMD5Password = (password) => {
     return createHash('md5').update(password).digest('hex')
@@ -21,18 +22,18 @@ const login = async (req, res) => {
     };
     const select = {_id: 1};
     const user = await usersService.getUser({find, select});
-    if (!user) return res.sendStatus(401);
+    if (!user) return res.status(401).json(new ErrorResponseDTO("There aren't any user with same data"));
 
     const accessToken = JWT.generateAccessToken({
         id: user._id,
         rememberMe: req.body.rememberMe,
     });
-    return res.json({accessToken});
+    return res.status(200).json(new SuccessResponseDTO(accessToken));
 }
 
 const registration = async (req, res) => {
     const userExists = await doesUserExists(req.body.email);
-    if (userExists) return res.sendStatus(409);
+    if (userExists) return res.status(409).json(new ErrorResponseDTO("User with this email was already registered"));
 
     // create new user
     const md5Password = generateMD5Password(req.body.password);
@@ -47,7 +48,7 @@ const registration = async (req, res) => {
         id: newUser._id,
         rememberMe: true,
     });
-    return res.json({accessToken});
+    return res.status(200).json(new SuccessResponseDTO(accessToken));
 }
 
 export default {

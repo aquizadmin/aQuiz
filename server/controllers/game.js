@@ -1,5 +1,6 @@
 import questionService from "../services/questions.js";
 import arrayRandomSorting from "../helpers/documentsRandomSorting.js";
+import { SuccessResponseDTO, ErrorResponseDTO } from "../DTO/index.js";
 
 const startGame = async (req, res) => {
     const filter = { category: req.body.category };
@@ -7,7 +8,7 @@ const startGame = async (req, res) => {
     const limit = Math.ceil(req.body.duration * 2);
     const questions = await questionService.getQuestions({filter, select, limit,});
     const randomlySortedDocuments = arrayRandomSorting({ array: questions });
-    res.json(randomlySortedDocuments);
+    res.status(200).json(new SuccessResponseDTO(randomlySortedDocuments));
 }
 
 const finishGame = async (req, res) => {
@@ -26,11 +27,11 @@ const finishGame = async (req, res) => {
     const correctAnswersCount = answers.reduce((sum, question) => {
         return question.correctAnswer === question.answer ? sum + 1 : sum;
     }, 0);
-    res.json({
+    res.status(200).json(new SuccessResponseDTO({
         questionsCount: allAnswers.length,
         correctAnswersCount: correctAnswersCount,
         answers: answers,
-    });
+    }));
 }
 
 export default {
