@@ -49,6 +49,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: 'auth'
+})
+
 const router = useRouter()
 
 const results = ref(JSON.parse(localStorage.getItem('results')).answers)

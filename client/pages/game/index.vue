@@ -76,6 +76,10 @@
 <script setup>
 import {useFetchWithHeaders} from '~/hooks';
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const router = useRouter()
 
 const {data: categories} = useFetchWithHeaders('/questions/getAllCategories', {

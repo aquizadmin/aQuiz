@@ -85,6 +85,10 @@
 import {useFetchWithHeaders} from '~/hooks';
 import {useTimer} from 'vue-timer-hook';
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const router = useRouter()
 const {query} = useRoute()
 
