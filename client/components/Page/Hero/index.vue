@@ -1,0 +1,66 @@
+<template>
+  <v-row
+    align="center"
+    class="position-relative py-8"
+    style="z-index: 2"
+  >
+    <v-col>
+      <h1 class="page-title">
+        {{ title }}
+
+        <span class="page-gradient-title">
+          {{ gradientTitle }}
+        </span>
+      </h1>
+
+      <div class="page-description pt-5">
+        {{ description }}
+      </div>
+    </v-col>
+
+    <v-col>
+      <v-img
+        alt="Hero image"
+        :src="image"
+        width="572"
+        height="572"
+        aspect-ratio="1"
+        :lazy-src="image"
+        :cover="imageCoverFit"
+        class="ml-auto"
+      />
+    </v-col>
+  </v-row>
+
+  <v-divider
+    thickness="2px"
+    color="rgba(231, 231, 231, 0.24)"
+  />
+</template>
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: '',
+    },
+    gradientTitle: {
+      type: String,
+      default: '',
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      default: '',
+    },
+    imageCoverFit: {
+      type: Boolean,
+      default: false,
+    },
+  }
+}
+</script>

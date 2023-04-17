@@ -1,0 +1,89 @@
+@import 'variables';
+
+*,
+*:before,
+*:after {
+  user-select: none;
+  font-family: "Outfit", sans-serif;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+.opacity-50 {
+  opacity: 0.5 !important;
+}
+
+.opacity-100 {
+  opacity: 1 !important;
+}
+
+.page-title {
+  color: #FFFFFF;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 80px;
+  letter-spacing: -0.014em;
+}
+
+.page-gradient-title {
+  background: $main-gradient-background;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-title-shadow,
+.timer-block .v-progress-circular__content {
+  text-shadow: 0 0 5px black;
+}
+
+.page-description {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 156%;
+}
+
+.page-blog-title {
+  color: #FFFFFF;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+.page-blog-subtitle {
+  color: #FFFFFF;
+  font-size: 35px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+.page-blog-description {
+  color: #C0C0C0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 32px;
+}
+
+.active-option {
+  background: $main-gradient-background !important;
+}
+
+.inactive-option {
+  background: rgb(33, 33, 33) !important;
+}
+
+@media (min-width: 1920px) {
+  .v-container {
+    max-width: 1400px !important;
+  }
+}
