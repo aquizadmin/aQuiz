@@ -9,7 +9,6 @@ const joiMiddleware = (schema) => {
             await schema.validateAsync(payload);
             next();
         } catch (e) {
-            console.log(e)
             res.sendStatus(400);
         }
     }

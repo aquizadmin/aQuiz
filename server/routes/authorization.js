@@ -6,5 +6,9 @@ const authorizationRouter = Router();
 
 authorizationRouter.post('/login', authorizationValidation.loginValidation, authorizationController.login);
 authorizationRouter.post('/registration', authorizationValidation.registrationValidation, authorizationController.registration);
+authorizationRouter.post('/confirmEmail', authorizationController.confirmEmail);
+authorizationRouter.post('/resetPasswordMail', authorizationController.resetPasswordMail);
+authorizationRouter.post('/canResetPassword', authorizationController.canResetPassword);
+authorizationRouter.post('/resetPassword', authorizationController.resetPassword);
 
 export default authorizationRouter;

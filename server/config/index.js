@@ -1,4 +1,5 @@
 const APP = {
+    PROTOCOL: "http",
     HOST: 'localhost',
     PORT: 5678,
 }
@@ -14,14 +15,31 @@ const MONGODB = {
 const JWT = {
     ACCESS_TOKEN: {
         SECRET: 'SOMESecret',
-        EXPIRED_IN_DEFAULT: 60, // 3600 second === 1 hour
+        EXPIRED_IN_DEFAULT: 60 * 60, // 60 minute
         EXPIRED_IN_REMEMBER_ME: 60 * 60 * 24 * 7, // one week
         REFRESHING_PERIOD: 1000 * 60 * 60 * 24 * 7 // one week in milliseconds
     },
+    CONFIRM_EMAIL_TOKEN: {
+        SECRET: "5",
+    },
+    RESET_PASSWORD_TOKEN: {
+        SECRET: "6",
+        EXPIRED_IN: 30 * 60, // 30 minute
+    }
 }
 
 const PASSWORD = {
     MD5SECRET: "VeryImportantSecret",
+}
+
+const MAILER = {
+    HOST: "smtp.mail.ru",
+    PORT: 465,
+    SECURE: true,
+    SENDER: {
+        EMAIL: "aquiz_mail@mail.ru",
+        PASSWORD: "iv1eMmvkrViXCK2bfivd",
+    }
 }
 
 export {
@@ -29,4 +47,5 @@ export {
     MONGODB,
     JWT,
     PASSWORD,
+    MAILER,
 }

@@ -1,24 +1,26 @@
 `use strict`
 import nodemailer from "nodemailer";
+import { MAILER } from "../config/index.js";
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.mail.ru",
-    port: 465,
-    secure: true,
+    host: MAILER.HOST,
+    port: MAILER.PORT,
+    secure: MAILER.PORT,
     auth: {
-        user: "aquiz_mail@mail.ru",
-        pass: "9zMqJ&prnbQb^J+J",
+        user: MAILER.SENDER.EMAIL,
+        pass: MAILER.SENDER.PASSWORD,
     },
 });
 
-const sendEmail = async ({to, subject, text, html}) => {
-    let info = await transporter.sendMail({
-        from: 'aquiz_mail@mail.ru',
+const send = ({to, subject, html}) => {
+    return transporter.sendMail({
+        from: MAILER.SENDER.EMAIL,
         to: to,
         subject: subject,
-        text: text,
         html: html,
     });
 }
 
-export default sendEmail;
+export default {
+    send
+};

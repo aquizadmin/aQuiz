@@ -31,8 +31,8 @@ const authenticate = async (req, res, next) => {
     }
 
     const userID = expirationIgnoredDecodedToken.payload.id;
-    const find = {_id: userID};
-    const user = await usersService.getUser(find);
+    const filter = {_id: userID};
+    const user = await usersService.getUser({filter});
     if (!user) return res.status(500).json(new ErrorResponseDTO("Server side issue. Case#1."));
     req.user = user;
     next();
