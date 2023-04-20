@@ -1,7 +1,7 @@
 import usersModel from '../database/models/users.js';
 
-const getUser = ({find, select} = {}) => {
-    return usersModel.findOne(find).select(select);
+const getUser = ({filter, select} = {}) => {
+    return usersModel.findOne(filter).select(select);
 }
 
 const createUser = ({firstName, lastName, email, password}) => {
@@ -11,10 +11,17 @@ const createUser = ({firstName, lastName, email, password}) => {
         email,
         password,
         rating: 0,
+        confirmed: false,
+        lastPasswordReset: new Date(0),
     });
+}
+
+const updateUser = ({filter, update}) => {
+    return usersModel.findOneAndUpdate(filter, update);
 }
 
 export default {
     getUser,
     createUser,
+    updateUser,
 }

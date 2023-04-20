@@ -5,6 +5,8 @@ export default new Schema({
     email: Schema.Types.String,
     password: Schema.Types.String,
     rating: Schema.Types.Number,
+    confirmed: Schema.Types.Boolean,
+    lastPasswordReset: Schema.Types.Date,
 }, {
     timestamps: true
 });
