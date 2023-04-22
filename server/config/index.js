@@ -2,7 +2,7 @@ const CLIENT = {
   PROTOCOL: "http",
   HOST: "localhost",
   PORT: 3000,
-}
+};
 
 const SERVER = {
   PROTOCOL: "http",

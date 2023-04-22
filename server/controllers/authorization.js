@@ -32,6 +32,8 @@ const login = async (req, res) => {
   const user = await usersService.getUser({ filter, select });
   if (!user) return res.status(401).json(new ErrorResponseDTO("There aren't any user with same data"));
 
+  if (!user.confirmed) if (!user) return res.status(401).json(new ErrorResponseDTO("Your account is not confirmed, please check your email"));
+
   const accessToken = JWT.generateAccessToken({
     id: user._id,
     rememberMe: req.body.rememberMe,
@@ -41,7 +43,7 @@ const login = async (req, res) => {
 
 const registration = async (req, res) => {
   const userExists = await doesUserExists(req.body.email);
-  if (userExists) return res.status(409).json(new ErrorResponseDTO("User with this email was already registered"));
+  // if (userExists) return res.status(409).json(new ErrorResponseDTO("User with this email was already registered"));
 
   // create new user
   const md5Password = generateMD5(req.body.password);
@@ -58,8 +60,9 @@ const registration = async (req, res) => {
   const accountConfirmationUrlToken = JWT.generateEmailConfirmToken({ _id: newUser._id });
   const accountConfirmationUrl = `${CLIENT.PROTOCOL}://${CLIENT.HOST}:${CLIENT.PORT}/confirmEmail/${accountConfirmationUrlToken}`;
   const templateData = { redirectUrl: accountConfirmationUrl };
-  const templateUrl = `${__dirname}/../mailTemplates/confirmRegister.ejs`;
+  const templateUrl = `${__dirname}/../mailTemplates/confirmEmail.ejs`;
   ejs.renderFile(templateUrl, templateData, async (error, data) => {
+    console.log(error);
     if (!error)
       mailerService.send({
         to: newUserData.email,

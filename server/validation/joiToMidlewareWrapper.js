@@ -1,3 +1,5 @@
+import { ErrorResponseDTO } from "../DTO/index.js";
+
 const joiMiddleware = (schema) => {
   return async (req, res, next) => {
     try {
@@ -9,7 +11,9 @@ const joiMiddleware = (schema) => {
       await schema.validateAsync(payload);
       next();
     } catch (e) {
-      res.sendStatus(400);
+      console.dir(e, {depth: null});
+      const invalidKey = e.details[0].context.key;
+      res.json(new ErrorResponseDTO(`${invalidKey} is not valid`));
     }
   };
 };
