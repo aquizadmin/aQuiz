@@ -65,10 +65,6 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: 'auth'
-})
-
 import { developers } from '~/constants'
 
 const handleClick = (url) => {
