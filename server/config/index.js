@@ -42,10 +42,16 @@ const MAILER = {
     }
 }
 
+const GAME = {
+    QUESTION_MORE_THEN_TIME: 2,
+    POINTS_PER_ANSWER: 100,
+}
+
 export {
     APP,
     MONGODB,
     JWT,
     PASSWORD,
     MAILER,
+    GAME,
 }
