@@ -5,16 +5,16 @@
  */
 
 class BaseResponseDTO {
-    /**
-     * Status of the response. Can be "SUCCESS" or "ERROR"
-     * @type {"SUCCESS" | "ERROR"}
-     * @public
-     */
-    status;
+  /**
+   * Status of the response. Can be "SUCCESS" or "ERROR"
+   * @type {"SUCCESS" | "ERROR"}
+   * @public
+   */
+  status;
 
-    constructor(status) {
-        this.status = status;
-    }
+  constructor(status) {
+    this.status = status;
+  }
 }
 
 /**
@@ -22,17 +22,17 @@ class BaseResponseDTO {
  * @class
  */
 class SuccessResponseDTO extends BaseResponseDTO {
-    /**
-     * Payload which should be sent as result of successful request
-     * @type {any}
-     * @public
-     */
-    payload;
+  /**
+   * Payload which should be sent as result of successful request
+   * @type {any}
+   * @public
+   */
+  payload;
 
-    constructor(payload) {
-        super("SUCCESS");
-        this.payload = payload
-    }
+  constructor(payload) {
+    super("SUCCESS");
+    this.payload = payload;
+  }
 }
 
 /**
@@ -40,20 +40,17 @@ class SuccessResponseDTO extends BaseResponseDTO {
  * @class
  */
 class ErrorResponseDTO extends BaseResponseDTO {
-    /**
-     * Error message which should be sent as result of failed request
-     * @type {String}
-     * @public
-     */
-    message;
+  /**
+   * Error message which should be sent as result of failed request
+   * @type {String}
+   * @public
+   */
+  message;
 
-    constructor(message) {
-        super("ERROR");
-        this.message = message
-    }
+  constructor(message) {
+    super("ERROR");
+    this.message = message;
+  }
 }
 
-export {
-    SuccessResponseDTO,
-    ErrorResponseDTO,
-}
+export { SuccessResponseDTO, ErrorResponseDTO };
