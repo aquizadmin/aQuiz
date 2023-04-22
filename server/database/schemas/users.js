@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
-export default new Schema({
+export default new Schema(
+  {
     firstName: Schema.Types.String,
     lastName: Schema.Types.String,
     email: Schema.Types.String,
@@ -7,6 +8,8 @@ export default new Schema({
     rating: Schema.Types.Number,
     confirmed: Schema.Types.Boolean,
     lastPasswordReset: Schema.Types.Date,
-}, {
-    timestamps: true
-});
+  },
+  {
+    timestamps: true,
+  },
+);
