@@ -102,7 +102,7 @@ const resetPasswordMail = async (req, res) => {
   });
 };
 
-const canResetPassword = async (req, res) => {
+const resetPassword = async (req, res) => {
   const token = req.body.token;
   const tokenPayload = JWT.decodePasswordResetToken(token);
   const tokenPayloadWithoutExpiration = JWT.decodePasswordResetToken(token, {
@@ -110,12 +110,7 @@ const canResetPassword = async (req, res) => {
   });
   if (tokenPayload.error && tokenPayloadWithoutExpiration.error) return res.status(401).json(new ErrorResponseDTO("Invalid token"));
   if (tokenPayload.error && tokenPayloadWithoutExpiration.payload) return res.status(401).json(new ErrorResponseDTO("Expired token"));
-  return res.status(200).json(new SuccessResponseDTO());
-};
 
-const resetPassword = async (req, res) => {
-  const token = req.body.token;
-  const tokenPayload = JWT.decodePasswordResetToken(token);
   const filter = {
     email: tokenPayload.payload.email,
   };
@@ -131,6 +126,5 @@ export default {
   registration,
   confirmEmail,
   resetPasswordMail,
-  canResetPassword,
   resetPassword,
 };
