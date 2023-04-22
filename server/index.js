@@ -1,4 +1,4 @@
-import { APP } from "./config/index.js";
+import { SERVER } from "./config/index.js";
 import connection from "./database/index.js";
 import express from "express";
 import cors from "cors";
@@ -22,8 +22,8 @@ app.use("/users", usersRouter);
 app.use("/game", gameRouter);
 app.use("/questions", questionsRouter);
 
-app.listen(APP.PORT, APP.HOST, () => {
-  console.log(`Server is working on http://${APP.HOST}:${APP.PORT}`);
+app.listen(SERVER.PORT, SERVER.HOST, () => {
+  console.log(`Server is working on http://${SERVER.HOST}:${SERVER.PORT}`);
 });
 
 process.on("uncaughtException", function (err) {
