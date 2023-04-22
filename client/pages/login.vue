@@ -322,7 +322,7 @@ const onSignIn = async () => {
   if (response) {
     await localStorage.setItem('access-token', response.value?.accessToken)
 
-    await router.push({path: '/game'})
+    await router.push({path: '/'})
   }
 }
 
@@ -335,7 +335,7 @@ const onSignUp = async () => {
   if (response) {
     await localStorage.setItem('access-token', response.value?.accessToken)
 
-    await router.push({path: '/game'})
+    await router.push({path: '/'})
   }
 }
 

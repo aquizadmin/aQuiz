@@ -52,7 +52,12 @@
                 </v-col>
 
                 <v-col>
-                  About us
+                  <NuxtLink
+                    to="/about"
+                    class="text-white text-decoration-none"
+                  >
+                    About Us
+                  </NuxtLink>
                 </v-col>
               </v-row>
             </v-col>

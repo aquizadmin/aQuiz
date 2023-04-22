@@ -54,7 +54,7 @@ export default {
     return {
       pages: [
         { name: 'Home', slug: '/' },
-        { name: 'About', slug: '/about' },
+        { name: 'About us', slug: '/about' },
         { name: 'Statistics', slug: '/statistics' },
       ],
     }

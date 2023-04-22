@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/users/64079b02bb9831b6add19ca1",
+							"raw": "http://localhost:5678/users/6440cff423ef4873c9c2057a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,7 +22,48 @@
 							"port": "5678",
 							"path": [
 								"users",
-								"64079b02bb9831b6add19ca1"
+								"6440cff423ef4873c9c2057a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users statistic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/users/statistic/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"users",
+								"statistic",
+								"1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"me"
 							]
 						}
 					},
@@ -62,13 +103,42 @@
 					"response": []
 				},
 				{
+					"name": "Confirm email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwY2ZmNDIzZWY0ODczYzljMjA1N2EiLCJpYXQiOjE2ODE5NjkxNDB9.ZG2Jpr0f2GKnypQTJASiU4JByRFMrKsny-pKQtqsPZs\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5678/confirmEmail/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"confirmEmail",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"ihatenpua\"}",
+							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"123456M\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,6 +154,62 @@
 							"port": "5678",
 							"path": [
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5678/resetPasswordMail",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"resetPasswordMail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydHVya2hhY2hhdHJ5YW5AeW9wbWFpbC5jb20iLCJpYXQiOjE2ODE5NjkyMzgsImV4cCI6MTY4MTk3MTAzOH0.r4Mn_nWqtIdrB4VHruyNHfeNkwKRLMCjN81TRQHHcSk\",\n\"password\": \"123456M\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5678/resetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"resetPassword"
 							]
 						}
 					},
@@ -205,7 +331,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"answers\": [{\"_id\":\"64347d03646ee41affea1fc3\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdc\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fde\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fe4\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fc0\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fd6\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fca\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd1\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc5\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fe2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc8\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc1\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fcb\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe1\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fdd\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe0\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fcd\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fce\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd8\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fc4\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fc6\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fd0\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fcf\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc9\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fc2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc7\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd9\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fcc\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe3\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd5\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdb\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd3\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd7\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd4\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fda\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdf\",\"answer\":2}]}",
+							"raw": "{\"answers\": [{\"_id\":\"64347d03646ee41affea1fc3\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdc\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fde\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fe4\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fc0\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fd6\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fca\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd1\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc5\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fe2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc8\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc1\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fcb\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe1\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fdd\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe0\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fcd\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fce\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd8\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fc4\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fc6\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fd0\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fcf\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc9\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fc2\",\"answer\":0},{\"_id\":\"64347d03646ee41affea1fc7\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd9\",\"answer\":2},{\"_id\":\"64347d03646ee41affea1fcc\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fe3\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd5\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdb\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd3\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fd7\",\"answer\":3},{\"_id\":\"64347d03646ee41affea1fd4\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fda\",\"answer\":1},{\"_id\":\"64347d03646ee41affea1fdf\",\"answer\":-1}]}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -267,14 +393,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/",
+							"raw": "http://localhost:5678/questions/getAllCategories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "5678",
 							"path": [
-								""
+								"questions",
+								"getAllCategories"
 							]
 						}
 					},
@@ -307,7 +434,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTczNDg3YWQ3YTcyZmUwN2JkOWQ1YiIsImlhdCI6MTY4MTA1MzMyOSwiZXhwIjoxNjgxMDUzMzg5fQ.O9KbE1ycOmv-RZihyBlKHFQQNwMogB1-8MDYDQV_vGU",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDBjZmY0MjNlZjQ4NzNjOWMyMDU3YSIsImlhdCI6MTY4MjE2Njg5NiwiZXhwIjoxNjgyMTcwNDk2fQ.2TgZLhA0zaWniViwsXZsO75J7wsIaLeicbCSVB7n7_o",
 				"type": "string"
 			}
 		]
