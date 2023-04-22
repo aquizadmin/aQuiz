@@ -43,7 +43,7 @@ const login = async (req, res) => {
 
 const registration = async (req, res) => {
   const userExists = await doesUserExists(req.body.email);
-  // if (userExists) return res.status(409).json(new ErrorResponseDTO("User with this email was already registered"));
+  if (userExists) return res.status(409).json(new ErrorResponseDTO("User with this email was already registered"));
 
   // create new user
   const md5Password = generateMD5(req.body.password);
