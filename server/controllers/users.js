@@ -24,12 +24,6 @@ const getUsersStatistic = async (req, res) => {
   res.status(200).json(new SuccessResponseDTO({ users, usersCount, pagesCount }));
 };
 
-// boandakutyun
-
-// neracutyun
-// node as backend, express, validation, jwt auth, mvc, mongodb
-//
-
 const me = async (req, res) => {
   return res.json(new SuccessResponseDTO(req.user));
 };
