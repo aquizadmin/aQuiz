@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { createHash } from "node:crypto";
 import ejs from "ejs";
 
-import { APP } from "../config/index.js";
+import { SERVER, CLIENT } from "../config/index.js";
 import JWT from "../services/JWT.js";
 import usersService from "../services/users.js";
 import mailerService from "../services/mailer.js";
@@ -56,7 +56,7 @@ const registration = async (req, res) => {
 
   // send confirmation email
   const accountConfirmationUrlToken = JWT.generateEmailConfirmToken({ _id: newUser._id });
-  const accountConfirmationUrl = `${APP.PROTOCOL}://${APP.HOST}:${APP.PORT}/confirmEmail/${accountConfirmationUrlToken}`;
+  const accountConfirmationUrl = `${CLIENT.PROTOCOL}://${CLIENT.HOST}:${CLIENT.PORT}/confirmEmail/${accountConfirmationUrlToken}`;
   const templateData = { redirectUrl: accountConfirmationUrl };
   const templateUrl = `${__dirname}/../mailTemplates/confirmRegister.ejs`;
   ejs.renderFile(templateUrl, templateData, async (error, data) => {
@@ -89,7 +89,7 @@ const resetPasswordMail = async (req, res) => {
 
   // send password reset email
   const passwordResetUrlToken = JWT.generatePasswordResetToken({ email: req.body.email });
-  const passwordResetUrl = `${APP.PROTOCOL}://${APP.HOST}:${APP.PORT}/resetPassword/${passwordResetUrlToken}`;
+  const passwordResetUrl = `${CLIENT.PROTOCOL}://${CLIENT.HOST}:${CLIENT.PORT}/resetPassword/${passwordResetUrlToken}`;
   const templateData = { redirectUrl: passwordResetUrl };
   const templateUrl = `${__dirname}/../mailTemplates/resetPassword.ejs`;
   ejs.renderFile(templateUrl, templateData, async (error, data) => {

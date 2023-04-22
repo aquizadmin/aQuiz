@@ -1,4 +1,10 @@
-const APP = {
+const CLIENT = {
+  PROTOCOL: "http",
+  HOST: "localhost",
+  PORT: 3000,
+}
+
+const SERVER = {
   PROTOCOL: "http",
   HOST: "localhost",
   PORT: 5678,
@@ -47,4 +53,4 @@ const GAME = {
   POINTS_PER_ANSWER: 100,
 };
 
-export { APP, MONGODB, JWT, PASSWORD, MAILER, GAME };
+export { SERVER, CLIENT, MONGODB, JWT, PASSWORD, MAILER, GAME };
