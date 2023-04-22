@@ -3,4 +3,8 @@ export default defineNuxtRouteMiddleware((to) => {
   if (!isLoggedIn) {
     return navigateTo('/login')
   }
+
+  if (!!isLoggedIn && (to.fullPath === '/login' || to.fullPath.includes('/resetPassword') || to.fullPath.includes('/resetPasswordMail') || to.fullPath.includes('/confirmEmail'))) {
+    return navigateTo('/');
+  }
 })

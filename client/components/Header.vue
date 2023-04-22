@@ -38,7 +38,9 @@
           </v-col>
 
           <v-col>
-            <UIGradientButton @click="handleClick">
+            <UIGradientButton
+              @click="handleClick"
+            >
               Let's play
             </UIGradientButton>
           </v-col>
@@ -48,24 +50,43 @@
   </v-app-bar>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      pages: [
-        { name: 'Home', slug: '/' },
-        { name: 'About us', slug: '/about' },
-        { name: 'Statistics', slug: '/statistics' },
-      ],
-    }
-  },
-  methods: {
-      handleClick() {
-          this.$router.push('/game')
-      },
-      goToHome() {
-          this.$router.push('/')
-      }
+<script setup>
+import {useFetchWithHeaders} from '~/hooks';
+
+const router = useRouter()
+const isLogged = ref(false)
+
+const pages = ref(
+  [
+    { name: 'Home', slug: '/' },
+    { name: 'About us', slug: '/about' },
+    { name: 'Statistics', slug: '/statistics' },
+  ],
+)
+
+const nonLoggedPages = ref(
+  [
+    { name: 'About us', slug: '/about' },
+  ]
+)
+
+const token = localStorage.getItem('access-token')
+
+if (token) {
+  const {data: response, error:errorResponse} = await useFetchWithHeaders('/me', {
+    method: 'GET',
+  })
+
+  if(response && !errorResponse) {
+    isLogged.value = true
   }
+}
+
+const handleClick = () => {
+  router.push('/game')
+}
+
+const goToHome = () => {
+  router.push('/')
 }
 </script>

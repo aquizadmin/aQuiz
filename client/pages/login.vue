@@ -55,17 +55,28 @@
                         :error-messages="getErrorMessage(v2$, 'password')"
                         @input="v2$.password.$touch"
                       />
+
+                      <span
+                        v-if="signInErrorResponse"
+                        class="text-red"
+                      >
+                        {{ signInErrorResponse }}
+                      </span>
+
                       <v-row>
                         <v-col
                           cols="12"
+                          class="my-4 text-right text-gray"
                         >
-                          <v-checkbox
-                            label="Remember Me"
-                            class="mt-n1"
-                            color="purple-darken-4"
-                          />
+                          <span
+                            class="cursor-pointer"
+                            @click="handleGoToReset"
+                          >
+                            Forgot password?
+                          </span>
                         </v-col>
                       </v-row>
+
                       <v-btn
                         color="purple-darken-4"
                         dark
@@ -83,7 +94,7 @@
               <v-col
                 cols="12"
                 md="6"
-                class="bg-purple-darken-4 rounded-bl-xl"
+                class="bg-secondary rounded-bl-xl"
               >
                 <div
                   class="text-center"
@@ -116,7 +127,7 @@
               <v-col
                 cols="12"
                 md="6"
-                class="bg-purple-darken-4 rounded-br-xl"
+                class="bg-secondary rounded-br-xl"
               >
                 <div
                   class="text-center"
@@ -224,6 +235,13 @@
                         @input="v$.password.$touch"
                       />
 
+                      <span
+                        v-if="signUpErrorResponse"
+                        class="text-red"
+                      >
+                        {{ signUpErrorResponse }}
+                      </span>
+
                       <v-btn
                         color="purple-darken-4"
                         dark
@@ -252,9 +270,15 @@ import {useVuelidate} from '@vuelidate/core';
 import {required, email, minLength, helpers} from '@vuelidate/validators';
 import {useFetchWithHeaders} from '~/hooks';
 
+definePageMeta({
+  middleware: 'auth'
+})
+
 const router = useRouter()
 
-const step = ref(2)
+const step = ref(1)
+const signInErrorResponse = ref('')
+const signUpErrorResponse = ref('')
 
 const signUpState = ref({
   firstName: '',
@@ -314,31 +338,40 @@ const v$ = useVuelidate(signUpRules, signUpState)
 const v2$ = useVuelidate(signInRules, signInState)
 
 const onSignIn = async () => {
-  const {data: response} = await useFetchWithHeaders('/login', {
+  const {data: response, error:errorResponse} = await useFetchWithHeaders('/login', {
     body: signInState.value,
     method: 'POST',
-  });
+  })
+  
+  if (errorResponse.value) {
+    signInErrorResponse.value = errorResponse.value.data.message
+    return
+  }
 
-  if (response) {
-    await localStorage.setItem('access-token', response.value?.accessToken)
+  if (response.value && response.value?.status === 'SUCCESS') {
+    signInErrorResponse.value = ''
+
+    await localStorage.setItem('access-token', response.value?.payload)
 
     await router.push({path: '/'})
   }
 }
 
 const onSignUp = async () => {
-  const {data: response} = await useFetchWithHeaders('/registration', {
+  const {error:errorResponse} = await useFetchWithHeaders('/registration', {
     body: signUpState.value,
     method: 'POST',
   });
 
-  if (response) {
-    await localStorage.setItem('access-token', response.value?.accessToken)
 
-    await router.push({path: '/'})
+  if (errorResponse.value) {
+    signUpErrorResponse.value = errorResponse.value.data.message
   }
 }
 
+const handleGoToReset = async () => {
+  await router.push({path: '/resetPasswordMail'})
+}
 </script>
 
 <style scoped>
