@@ -74,6 +74,10 @@ img {
   line-height: 32px;
 }
 
+.page-blog-avatar img {
+  border-radius: 100%;
+}
+
 .active-option {
   background: $main-gradient-background !important;
 }

@@ -5,13 +5,16 @@
     style="z-index: 2"
   >
     <v-col>
-      <h1 class="page-title">
-        {{ title }}
+      <div>
+        <h1 class="page-title">
+          {{ title }}
 
-        <span class="page-gradient-title">
-          {{ gradientTitle }}
-        </span>
-      </h1>
+          <span class="page-gradient-title">
+            {{ gradientTitle }}
+          </span>
+        </h1>
+      </div>
+
 
       <div class="page-description pt-5">
         {{ description }}
@@ -38,29 +41,33 @@
   />
 </template>
 
-<script>
-export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    gradientTitle: {
-      type: String,
-      default: '',
-    },
-    description: {
-      type: String,
-      default: '',
-    },
-    image: {
-      type: String,
-      default: '',
-    },
-    imageCoverFit: {
-      type: Boolean,
-      default: false,
-    },
-  }
-}
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    default: '',
+  },
+  gradientTitle: {
+    type: String,
+    default: '',
+  },
+  description: {
+    type: String,
+    default: '',
+  },
+  image: {
+    type: String,
+    default: '',
+  },
+  imageCoverFit: {
+    type: Boolean,
+    default: false,
+  },
+})
 </script>
+
+<style scoped>
+img {
+    border-radius: 10px;
+}
+</style>
