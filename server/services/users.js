@@ -28,10 +28,15 @@ const getUsersCount = () => {
   return usersModel.count();
 };
 
+const getUserPosition = ({ filter, sort }) => {
+  return usersModel.find(filter).sort(sort).count();
+};
+
 export default {
   getUser,
   getUsers,
   createUser,
   updateUser,
   getUsersCount,
+  getUserPosition,
 };

@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/users/64079b02bb9831b6add19ca1",
+							"raw": "http://localhost:5678/users/6440cff423ef4873c9c2057a",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,7 +22,48 @@
 							"port": "5678",
 							"path": [
 								"users",
-								"64079b02bb9831b6add19ca1"
+								"6440cff423ef4873c9c2057a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users statistic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/users/statistic/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"users",
+								"statistic",
+								"1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"me"
 							]
 						}
 					},
@@ -97,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"ihatenpua\"}",
+							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"123456M\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -141,34 +182,6 @@
 							"port": "5678",
 							"path": [
 								"resetPasswordMail"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Can reset password",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFydHVya2hhY2hhdHJ5YW5AeW9wbWFpbC5jb20iLCJpYXQiOjE2ODE5NjkyMzgsImV4cCI6MTY4MTk3MTAzOH0.r4Mn_nWqtIdrB4VHruyNHfeNkwKRLMCjN81TRQHHcSk\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5678/canResetPassword",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5678",
-							"path": [
-								"canResetPassword"
 							]
 						}
 					},
@@ -421,7 +434,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM2YmY1NGY1M2EwOTE5ZTNiOWI3ODIiLCJpYXQiOjE2ODIwNzM3MzMsImV4cCI6MTY4MjA3Mzc5M30._WsTnPJpnkEmhh26XSPGHkpxSogYnTyN728S5lBrDyQ",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDBjZmY0MjNlZjQ4NzNjOWMyMDU3YSIsImlhdCI6MTY4MjE2Njg5NiwiZXhwIjoxNjgyMTcwNDk2fQ.2TgZLhA0zaWniViwsXZsO75J7wsIaLeicbCSVB7n7_o",
 				"type": "string"
 			}
 		]

@@ -12,7 +12,7 @@ const getUsersStatistic = async (req, res) => {
   const count = Number(req.params.count);
 
   const usersCount = await usersService.getUsersCount();
-  const pagesCount = Math.ceil(usersCount / page);
+  const pagesCount = Math.ceil(usersCount / count);
   const users = await usersService.getUsers({
     filter: {},
     select: { firstName: 1, lastName: 1, rating: 1 },
