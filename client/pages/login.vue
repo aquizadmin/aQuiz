@@ -36,10 +36,11 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-16"
                         :error="v2$.$errors.email"
                         :error-messages="getErrorMessage(v2$, 'email')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v2$.email.$touch"
                       />
                       <v-text-field
@@ -48,11 +49,12 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-4"
                         type="password"
                         :error="v2$.$errors.password"
                         :error-messages="getErrorMessage(v2$, 'password')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v2$.password.$touch"
                       />
 
@@ -185,10 +187,11 @@
                             variant="outlined"
                             dense
                             color="purple-darken-4"
-                            autocomplete="false"
                             class="mt-4"
                             :error="v$.$errors.firstName"
                             :error-messages="getErrorMessage(v$, 'firstName')"
+                            placeholder=" "
+                            persistent-placeholder
                             @input="v$.firstName.$touch"
                           />
                         </v-col>
@@ -202,10 +205,11 @@
                             variant="outlined"
                             dense
                             color="purple-darken-4"
-                            autocomplete="false"
                             class="mt-4"
                             :error="v$.$errors.lastName"
                             :error-messages="getErrorMessage(v$, 'lastName')"
+                            placeholder=" "
+                            persistent-placeholder
                             @input="v$.lastName.$touch"
                           />
                         </v-col>
@@ -216,10 +220,11 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-2"
                         :error="v$.$errors.email"
                         :error-messages="getErrorMessage(v$, 'email')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v$.email.$touch"
                       />
                       <v-text-field
@@ -227,11 +232,12 @@
                         label="Password"
                         variant="outlined"
                         color="purple-darken-4"
-                        autocomplete="false"
                         type="password"
                         class="mt-2"
                         :error="v$.$errors.password"
                         :error-messages="getErrorMessage(v$, 'password')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v$.password.$touch"
                       />
 
@@ -271,7 +277,7 @@ import {required, email, minLength, helpers} from '@vuelidate/validators';
 import {useFetchWithHeaders} from '~/hooks';
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'login'
 })
 
 const router = useRouter()

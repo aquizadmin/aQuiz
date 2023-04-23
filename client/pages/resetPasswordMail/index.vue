@@ -84,7 +84,7 @@ import {required, email, helpers} from '@vuelidate/validators';
 import {useFetchWithHeaders} from '~/hooks';
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'login'
 })
 
 const resetEmailErrorResponse = ref('')
