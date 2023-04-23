@@ -70,7 +70,7 @@
                   />
                   <v-card-text class="animated-gradient-box">
                     <div class="page-blog-subtitle pa-12">
-                      Maybe we can game again? 🤩
+                      Maybe can we play again? 🤩
                     </div>
                   </v-card-text>
                   <v-card-actions class="justify-end bg-secondary">
