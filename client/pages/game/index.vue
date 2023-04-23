@@ -49,13 +49,13 @@
             />
           </v-col>
 
-          <v-col>
+          <v-col v-if="categories && categories?.payload">
             <v-select
               v-model="formData['category']"
               aria-selected="false"
               hide-details
               label="Category"
-              :items="categories?.allCategories"
+              :items="categories?.payload"
               variant="underlined"
               color="white"
             />
@@ -75,6 +75,7 @@
 
 <script setup>
 import {useFetchWithHeaders} from '~/hooks';
+import {ca} from "vuetify/locale";
 
 definePageMeta({
   middleware: 'auth'

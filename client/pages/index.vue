@@ -13,8 +13,7 @@
 
     <v-carousel
       v-if="technologies?.payload.length"
-      cycle
-      height="400"
+      height="315"
       hide-delimiters
       :show-arrows="technologies?.payload.length && Math.ceil(technologies?.payload.length / perPage) > 1 ? 'hover' : false"
       class="py-5"
@@ -27,6 +26,7 @@
           <v-col
             v-for="(slideItem, index) in technologies?.payload.slice(i * perPage, i * perPage + perPage)"
             :key="index"
+            class="py-0"
           >
             <v-card
               class="mx-auto"
