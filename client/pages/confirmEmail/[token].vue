@@ -30,7 +30,7 @@
 import {useFetchWithHeaders} from '~/hooks';
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'login'
 })
 
 const { path } = useRoute()

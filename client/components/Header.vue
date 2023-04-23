@@ -26,8 +26,9 @@
           align="center"
         >
           <v-col
-            v-for="(page, index) in pages"
+            v-for="(page, index) in isLogged ? pages : nonLoggedPages"
             :key="index"
+            :class="!isLogged ? 'text-right' : ''"
           >
             <NuxtLink
               :to="page.slug"
@@ -37,12 +38,23 @@
             </NuxtLink>
           </v-col>
 
-          <v-col>
+          <v-col
+            v-if="isLogged"
+            class="d-flex items-center"
+          >
             <UIGradientButton
               @click="handleClick"
             >
               Let's play
             </UIGradientButton>
+
+            <v-btn
+              density="compact"
+              color="white"
+              icon="mdi-logout"
+              class="ml-3 align-self-center"
+              @click="handleLogout"
+            />
           </v-col>
         </v-row>
       </v-row>
@@ -72,12 +84,12 @@ const nonLoggedPages = ref(
 
 const token = localStorage.getItem('access-token')
 
-if (token) {
-  const {data: response, error:errorResponse} = await useFetchWithHeaders('/me', {
+if (!!token || (token && ['undefined', 'null'].includes(token))) {
+  const {data: response, error:errorResponse} = await useFetchWithHeaders('/users/me', {
     method: 'GET',
   })
 
-  if(response && !errorResponse) {
+  if(response.value && !errorResponse.value) {
     isLogged.value = true
   }
 }
@@ -88,5 +100,11 @@ const handleClick = () => {
 
 const goToHome = () => {
   router.push('/')
+}
+
+const handleLogout = () => {
+  localStorage.removeItem('access-token')
+  isLogged.value = false
+  router.replace('/login')
 }
 </script>

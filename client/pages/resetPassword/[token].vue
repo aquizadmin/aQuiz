@@ -93,7 +93,7 @@ import {required, helpers, sameAs, minLength} from '@vuelidate/validators';
 import {useFetchWithHeaders} from '~/hooks';
 
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'login'
 })
 
 const { path } = useRoute()
