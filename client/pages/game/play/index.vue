@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="game.payload"
     class="mx-auto mt-10"
     max-width="1200"
   >
@@ -12,7 +13,7 @@
     >
       <div class="d-flex justify-space-between align-end timer-block">
         <v-card-title class="page-title-shadow">
-          {{ game[current].question }}
+          {{ game.payload[current].question }}
         </v-card-title>
 
         <v-progress-circular
@@ -37,7 +38,7 @@
     <v-card-text>
       <v-row>
         <v-col
-          v-for="(option, index) in game[current].answers"
+          v-for="(option, index) in game.payload[current].answers"
           :key="index"
           cols="6"
         >
@@ -45,7 +46,7 @@
             variant="tonal"
             class="mx-auto cursor-pointer h-100"
             :class="answers[current].answer === option ? 'active-option text-white' : 'inactive-option'"
-            @click="handleSelectAnswer(game[current]._id, option, index, current)"
+            @click="handleSelectAnswer(game.payload[current]._id, option, index, current)"
           >
             <v-card-text>
               {{ option }}
@@ -98,7 +99,7 @@ const {data: game} = await useFetchWithHeaders('/game/startGame', {
 })
 
 const current = ref(0);
-const answers = ref(game.value.map(question => {
+const answers = ref(game.value?.payload.map(question => {
   return {
     _id: question._id,
     answer: '',
@@ -134,14 +135,13 @@ const handleFinishGame = async () => {
     body: {answers: finishGameData},
     method: 'POST',
   });
-
-  end.value?.answers.map(el => {
-    const findQuestion = game.value.find(elem => elem._id === el._id)
+  end.value?.payload?.answers.map(el => {
+    const findQuestion = game.value?.payload.find(elem => elem._id === el._id)
     el.question = findQuestion.question
     el.answersList = findQuestion.answers
   })
 
-  localStorage.setItem('results', JSON.stringify(end.value))
+  localStorage.setItem('results', JSON.stringify(end.value?.payload))
 
   await router.push({path: '/game/finish'});
 }

@@ -1,1 +1,1 @@
-mongorestore -d aQuiz /aQuiz
+mongorestore -d aQuiz ./aQuiz
