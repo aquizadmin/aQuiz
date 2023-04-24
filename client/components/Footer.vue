@@ -48,12 +48,18 @@
             <v-col>
               <v-row>
                 <v-col>
-                  Privacy Policy
+                  <NuxtLink
+                    active-class="text-pink-darken-3"
+                    class="text-white text-decoration-none"
+                  >
+                    Contact Us
+                  </NuxtLink>
                 </v-col>
 
                 <v-col>
                   <NuxtLink
                     to="/about"
+                    active-class="text-pink-darken-3"
                     class="text-white text-decoration-none"
                   >
                     About Us

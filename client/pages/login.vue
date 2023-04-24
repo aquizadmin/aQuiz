@@ -36,10 +36,11 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-16"
                         :error="v2$.$errors.email"
                         :error-messages="getErrorMessage(v2$, 'email')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v2$.email.$touch"
                       />
                       <v-text-field
@@ -48,24 +49,36 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-4"
                         type="password"
                         :error="v2$.$errors.password"
                         :error-messages="getErrorMessage(v2$, 'password')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v2$.password.$touch"
                       />
+
+                      <span
+                        v-show="signInErrorResponse"
+                        class="text-red"
+                      >
+                        {{ signInErrorResponse }}
+                      </span>
+
                       <v-row>
                         <v-col
                           cols="12"
+                          class="my-4 text-right text-gray"
                         >
-                          <v-checkbox
-                            label="Remember Me"
-                            class="mt-n1"
-                            color="purple-darken-4"
-                          />
+                          <span
+                            class="cursor-pointer"
+                            @click="handleGoToReset"
+                          >
+                            Forgot password?
+                          </span>
                         </v-col>
                       </v-row>
+
                       <v-btn
                         color="purple-darken-4"
                         dark
@@ -83,7 +96,7 @@
               <v-col
                 cols="12"
                 md="6"
-                class="bg-purple-darken-4 rounded-bl-xl"
+                class="bg-secondary rounded-bl-xl"
               >
                 <div
                   class="text-center"
@@ -116,7 +129,7 @@
               <v-col
                 cols="12"
                 md="6"
-                class="bg-purple-darken-4 rounded-br-xl"
+                class="bg-secondary rounded-br-xl"
               >
                 <div
                   class="text-center"
@@ -174,10 +187,11 @@
                             variant="outlined"
                             dense
                             color="purple-darken-4"
-                            autocomplete="false"
                             class="mt-4"
                             :error="v$.$errors.firstName"
                             :error-messages="getErrorMessage(v$, 'firstName')"
+                            placeholder=" "
+                            persistent-placeholder
                             @input="v$.firstName.$touch"
                           />
                         </v-col>
@@ -191,10 +205,11 @@
                             variant="outlined"
                             dense
                             color="purple-darken-4"
-                            autocomplete="false"
                             class="mt-4"
                             :error="v$.$errors.lastName"
                             :error-messages="getErrorMessage(v$, 'lastName')"
+                            placeholder=" "
+                            persistent-placeholder
                             @input="v$.lastName.$touch"
                           />
                         </v-col>
@@ -205,10 +220,11 @@
                         variant="outlined"
                         dense
                         color="purple-darken-4"
-                        autocomplete="false"
                         class="mt-2"
                         :error="v$.$errors.email"
                         :error-messages="getErrorMessage(v$, 'email')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v$.email.$touch"
                       />
                       <v-text-field
@@ -216,13 +232,28 @@
                         label="Password"
                         variant="outlined"
                         color="purple-darken-4"
-                        autocomplete="false"
                         type="password"
                         class="mt-2"
                         :error="v$.$errors.password"
                         :error-messages="getErrorMessage(v$, 'password')"
+                        placeholder=" "
+                        persistent-placeholder
                         @input="v$.password.$touch"
                       />
+
+                      <span
+                        v-show="signUpErrorResponse"
+                        class="text-red"
+                      >
+                        {{ signUpErrorResponse }}
+                      </span>
+
+                      <span
+                        v-show="signUpSuccessResponse"
+                        class="text-green"
+                      >
+                        {{ signUpSuccessResponse }}
+                      </span>
 
                       <v-btn
                         color="purple-darken-4"
@@ -252,9 +283,16 @@ import {useVuelidate} from '@vuelidate/core';
 import {required, email, minLength, helpers} from '@vuelidate/validators';
 import {useFetchWithHeaders} from '~/hooks';
 
+definePageMeta({
+  middleware: 'login'
+})
+
 const router = useRouter()
 
-const step = ref(2)
+const step = ref(1)
+const signInErrorResponse = ref('')
+const signUpErrorResponse = ref('')
+const signUpSuccessResponse = ref('')
 
 const signUpState = ref({
   firstName: '',
@@ -314,31 +352,49 @@ const v$ = useVuelidate(signUpRules, signUpState)
 const v2$ = useVuelidate(signInRules, signInState)
 
 const onSignIn = async () => {
-  const {data: response} = await useFetchWithHeaders('/login', {
+  const {data: response, error:errorResponse} = await useFetchWithHeaders('/login', {
     body: signInState.value,
     method: 'POST',
-  });
+  })
+  
+  if (errorResponse.value) {
+    signInErrorResponse.value = errorResponse.value.data.message
+    return
+  }
 
-  if (response) {
-    await localStorage.setItem('access-token', response.value?.accessToken)
+  if (response.value && response.value?.status === 'SUCCESS') {
+    signInErrorResponse.value = ''
+
+    await localStorage.setItem('access-token', response.value?.payload)
 
     await router.push({path: '/'})
   }
 }
 
 const onSignUp = async () => {
-  const {data: response} = await useFetchWithHeaders('/registration', {
+  const {data:response, error:errorResponse} = await useFetchWithHeaders('/registration', {
     body: signUpState.value,
     method: 'POST',
   });
 
-  if (response) {
-    await localStorage.setItem('access-token', response.value?.accessToken)
 
-    await router.push({path: '/'})
+  if (errorResponse.value) {
+    signUpErrorResponse.value = errorResponse.value.data.message
+    return
+  }
+
+  if (response && response.value?.status === 'SUCCESS') {
+    signUpSuccessResponse.value = 'Please check Your email.'
+
+    setTimeout(() => {
+      signUpSuccessResponse.value = ''
+    }, 5000)
   }
 }
 
+const handleGoToReset = async () => {
+  await router.push({path: '/resetPasswordMail'})
+}
 </script>
 
 <style scoped>

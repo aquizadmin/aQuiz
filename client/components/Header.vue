@@ -26,21 +26,75 @@
           align="center"
         >
           <v-col
-            v-for="(page, index) in pages"
+            v-for="(page, index) in isLogged ? pages : nonLoggedPages"
             :key="index"
+            :class="!isLogged ? 'text-right' : ''"
           >
             <NuxtLink
               :to="page.slug"
+              active-class="text-pink-darken-3"
               class="text-white text-decoration-none"
             >
               {{ page.name }}
             </NuxtLink>
           </v-col>
 
-          <v-col>
-            <UIGradientButton @click="handleClick">
+          <v-col
+            v-if="isLogged"
+            class="d-flex items-center"
+          >
+            <UIGradientButton
+              @click="handleClick"
+            >
               Let's play
             </UIGradientButton>
+
+            <v-dialog
+              transition="dialog-top-transition"
+              width="auto"
+            >
+              <template #activator="{ props }">
+                <v-btn
+                  density="compact"
+                  color="white"
+                  icon="mdi-logout"
+                  class="ml-3 align-self-center"
+                  v-bind="props"
+                />
+              </template>
+              <template #default="{ isActive }">
+                <v-card>
+                  <v-toolbar
+                    color="secondary"
+                    title="Are you sure? 🤔"
+                  />
+                  <v-card-text class="animated-gradient-box">
+                    <div class="page-blog-subtitle pa-12">
+                      Maybe can we play again? 🤩
+                    </div>
+                  </v-card-text>
+                  <v-card-actions class="justify-end bg-secondary">
+                    <v-btn
+                      variant="text"
+                      color="white"
+                      @click="isActive.value = false"
+                    >
+                      Close
+                    </v-btn>
+
+                    <v-btn
+                      variant="text"
+                      color="primary"
+                      @click="handleLogout"
+                    >
+                      <span class="page-gradient-title">
+                        Log Out
+                      </span>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
           </v-col>
         </v-row>
       </v-row>
@@ -48,24 +102,55 @@
   </v-app-bar>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      pages: [
-        { name: 'Home', slug: '/' },
-        { name: 'About us', slug: '/about' },
-        { name: 'Statistics', slug: '/statistics' },
-      ],
-    }
-  },
-  methods: {
-      handleClick() {
-          this.$router.push('/game')
-      },
-      goToHome() {
-          this.$router.push('/')
-      }
+<script setup>
+import {useFetchWithHeaders} from '~/hooks';
+
+const route = useRoute()
+const router = useRouter()
+const isLogged = ref(false)
+
+const pages = ref(
+  [
+    { name: 'Home', slug: '/' },
+    { name: 'About us', slug: '/about' },
+    { name: 'Statistics', slug: '/statistics' },
+  ],
+)
+
+const nonLoggedPages = ref(
+  [
+    { name: 'About us', slug: '/about' },
+  ]
+)
+
+
+const onRouteChange = async () => {
+  const token = localStorage.getItem('access-token')
+
+  if (!!token || (token && ['undefined', 'null'].includes(token))) {
+    const {data: response, error:errorResponse} = await useFetchWithHeaders('/users/me', {
+      method: 'GET',
+    })
+
+    isLogged.value = response.value && !errorResponse.value
   }
 }
+
+onRouteChange()
+
+const handleClick = () => {
+  router.push('/game')
+}
+
+const goToHome = () => {
+  router.push('/')
+}
+
+const handleLogout = () => {
+  localStorage.removeItem('access-token')
+  isLogged.value = false
+  router.replace('/login')
+}
+
+watch(() => route.name, onRouteChange)
 </script>

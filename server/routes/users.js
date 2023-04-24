@@ -6,8 +6,8 @@ import { Router } from "express";
 const usersRouter = Router();
 
 usersRouter.use(authentication.authenticate);
-usersRouter.get("/:id", userValidation.UserByIdValidation, usersController.getUserByID);
 usersRouter.get("/me", userValidation.UserByIdValidation, usersController.me);
+usersRouter.get("/:id", userValidation.UserByIdValidation, usersController.getUserByID);
 usersRouter.get("/statistic/:page/:count", usersController.getUsersStatistic);
 
 export default usersRouter;

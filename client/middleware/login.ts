@@ -9,15 +9,10 @@ export default defineNuxtRouteMiddleware(async () => {
       method: 'GET',
     })
 
-
     isLoggedIn.value = !!me.value && !errorResponse.value
   }
 
-  if (!isLoggedIn.value) {
-    return navigateTo('/login')
+  if (isLoggedIn.value) {
+    return navigateTo('/')
   }
-  // if (isLoggedIn && (to.fullPath === '/login' || to.fullPath.includes('/resetPassword') || to.fullPath.includes('/resetPasswordMail') || to.fullPath.includes('/confirmEmail'))) {
-  //   return navigateTo('/')
-  // }
-
 })
