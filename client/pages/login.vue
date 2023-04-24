@@ -59,7 +59,7 @@
                       />
 
                       <span
-                        v-if="signInErrorResponse"
+                        v-show="signInErrorResponse"
                         class="text-red"
                       >
                         {{ signInErrorResponse }}
@@ -242,10 +242,17 @@
                       />
 
                       <span
-                        v-if="signUpErrorResponse"
+                        v-show="signUpErrorResponse"
                         class="text-red"
                       >
                         {{ signUpErrorResponse }}
+                      </span>
+
+                      <span
+                        v-show="signUpSuccessResponse"
+                        class="text-green"
+                      >
+                        {{ signUpSuccessResponse }}
                       </span>
 
                       <v-btn
@@ -285,6 +292,7 @@ const router = useRouter()
 const step = ref(1)
 const signInErrorResponse = ref('')
 const signUpErrorResponse = ref('')
+const signUpSuccessResponse = ref('')
 
 const signUpState = ref({
   firstName: '',
@@ -364,7 +372,7 @@ const onSignIn = async () => {
 }
 
 const onSignUp = async () => {
-  const {error:errorResponse} = await useFetchWithHeaders('/registration', {
+  const {data:response, error:errorResponse} = await useFetchWithHeaders('/registration', {
     body: signUpState.value,
     method: 'POST',
   });
@@ -372,6 +380,15 @@ const onSignUp = async () => {
 
   if (errorResponse.value) {
     signUpErrorResponse.value = errorResponse.value.data.message
+    return
+  }
+
+  if (response && response.value?.status === 'SUCCESS') {
+    signUpSuccessResponse.value = 'Please check Your email.'
+
+    setTimeout(() => {
+      signUpSuccessResponse.value = ''
+    }, 5000)
   }
 }
 

@@ -32,6 +32,7 @@
           >
             <NuxtLink
               :to="page.slug"
+              active-class="text-pink-darken-3"
               class="text-white text-decoration-none"
             >
               {{ page.name }}
@@ -48,13 +49,52 @@
               Let's play
             </UIGradientButton>
 
-            <v-btn
-              density="compact"
-              color="white"
-              icon="mdi-logout"
-              class="ml-3 align-self-center"
-              @click="handleLogout"
-            />
+            <v-dialog
+              transition="dialog-top-transition"
+              width="auto"
+            >
+              <template #activator="{ props }">
+                <v-btn
+                  density="compact"
+                  color="white"
+                  icon="mdi-logout"
+                  class="ml-3 align-self-center"
+                  v-bind="props"
+                />
+              </template>
+              <template #default="{ isActive }">
+                <v-card>
+                  <v-toolbar
+                    color="secondary"
+                    title="Are you sure? 🤔"
+                  />
+                  <v-card-text class="animated-gradient-box">
+                    <div class="page-blog-subtitle pa-12">
+                      Maybe can we play again? 🤩
+                    </div>
+                  </v-card-text>
+                  <v-card-actions class="justify-end bg-secondary">
+                    <v-btn
+                      variant="text"
+                      color="white"
+                      @click="isActive.value = false"
+                    >
+                      Close
+                    </v-btn>
+
+                    <v-btn
+                      variant="text"
+                      color="primary"
+                      @click="handleLogout"
+                    >
+                      <span class="page-gradient-title">
+                        Log Out
+                      </span>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
           </v-col>
         </v-row>
       </v-row>
@@ -65,6 +105,7 @@
 <script setup>
 import {useFetchWithHeaders} from '~/hooks';
 
+const route = useRoute()
 const router = useRouter()
 const isLogged = ref(false)
 
@@ -82,17 +123,20 @@ const nonLoggedPages = ref(
   ]
 )
 
-const token = localStorage.getItem('access-token')
 
-if (!!token || (token && ['undefined', 'null'].includes(token))) {
-  const {data: response, error:errorResponse} = await useFetchWithHeaders('/users/me', {
-    method: 'GET',
-  })
+const onRouteChange = async () => {
+  const token = localStorage.getItem('access-token')
 
-  if(response.value && !errorResponse.value) {
-    isLogged.value = true
+  if (!!token || (token && ['undefined', 'null'].includes(token))) {
+    const {data: response, error:errorResponse} = await useFetchWithHeaders('/users/me', {
+      method: 'GET',
+    })
+
+    isLogged.value = response.value && !errorResponse.value
   }
 }
+
+onRouteChange()
 
 const handleClick = () => {
   router.push('/game')
@@ -107,4 +151,6 @@ const handleLogout = () => {
   isLogged.value = false
   router.replace('/login')
 }
+
+watch(() => route.name, onRouteChange)
 </script>
