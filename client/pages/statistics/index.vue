@@ -98,7 +98,7 @@ const headers = ref([
   },
 ])
 
-const itemsPerPage = ref(5)
+const itemsPerPage = ref(10)
 const totalItems = ref(0)
 const loading = ref(true)
 const serverItems = ref([])
