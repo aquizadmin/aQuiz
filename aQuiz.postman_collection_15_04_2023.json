@@ -56,14 +56,66 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/me",
+							"raw": "http://localhost:5678/users/me",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "5678",
 							"path": [
+								"users",
 								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"comment\": \"hello there!!!\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5678/users/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"users",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/users/comment/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"users",
+								"comment",
+								"1",
+								"5"
 							]
 						}
 					},
@@ -138,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"123456M\"}",
+							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"1234567\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -410,6 +462,52 @@
 			]
 		},
 		{
+			"name": "books",
+			"item": [
+				{
+					"name": "Get book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/books/64623a243083fd0f2a32d675",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"books",
+								"64623a243083fd0f2a32d675"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/books/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"books",
+								"1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Example",
 			"request": {
 				"method": "GET",
@@ -434,7 +532,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NDBjZmY0MjNlZjQ4NzNjOWMyMDU3YSIsImlhdCI6MTY4MjE2Njg5NiwiZXhwIjoxNjgyMTcwNDk2fQ.2TgZLhA0zaWniViwsXZsO75J7wsIaLeicbCSVB7n7_o",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NjI1YjVlOTNlZDc2MjNhNWVmOTcwNyIsImlhdCI6MTY4NDE2Nzc4NywiZXhwIjoxNjg0MTcxMzg3fQ.exQDkfVKNTkf059cqv9sTc8ccANNFY6ZUl30ri_pk-U",
 				"type": "string"
 			}
 		]
