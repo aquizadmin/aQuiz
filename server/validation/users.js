@@ -9,8 +9,16 @@ const UserByIdSchema = Joi.object({
   }),
 });
 
+const SendCommentSchema = Joi.object({
+  body: Joi.object({
+    message: Joi.string().min(5).max(500).required(),
+  })
+})
+
 const UserByIdValidation = joiMiddleware(UserByIdSchema);
+const SendCommentValidation = joiMiddleware(SendCommentSchema);
 
 export default {
-  UserByIdValidation,
+  UserById: UserByIdValidation,
+  SendComment: SendCommentValidation,
 };

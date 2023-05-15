@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import { createHash } from "node:crypto";
 import ejs from "ejs";
 
-import { SERVER, CLIENT } from "../config/index.js";
+import { CLIENT } from "../config/index.js";
 import JWT from "../services/JWT.js";
 import usersService from "../services/users.js";
 import mailerService from "../services/mailer.js";
@@ -28,11 +28,11 @@ const login = async (req, res) => {
     email: req.body.email,
     password: md5Password,
   };
-  const select = { _id: 1 };
+  const select = { _id: 1, confirmed: 1 };
   const user = await usersService.getUser({ filter, select });
   if (!user) return res.status(401).json(new ErrorResponseDTO("There aren't any user with same data"));
 
-  if (!user.confirmed) if (!user) return res.status(401).json(new ErrorResponseDTO("Your account is not confirmed, please check your email"));
+  if (!user.confirmed) return res.status(401).json(new ErrorResponseDTO("Your account is not confirmed, please check your email"));
 
   const accessToken = JWT.generateAccessToken({
     id: user._id,

@@ -1,5 +1,5 @@
 import { SERVER } from "./config/index.js";
-import connection from "./database/index.js";
+import * as database from "./database/index.js";
 import express from "express";
 import cors from "cors";
 
@@ -21,6 +21,8 @@ app.use("/", authorizationRouter);
 app.use("/users", usersRouter);
 app.use("/game", gameRouter);
 app.use("/questions", questionsRouter);
+
+await database.connect();
 
 app.listen(SERVER.PORT, SERVER.HOST, () => {
   console.log(`Server is working on http://${SERVER.HOST}:${SERVER.PORT}`);
