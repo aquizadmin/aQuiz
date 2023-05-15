@@ -508,6 +508,52 @@
 			]
 		},
 		{
+			"name": "videos",
+			"item": [
+				{
+					"name": "Get video",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/videos/64623a243083fd0f2a32d675",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"videos",
+								"64623a243083fd0f2a32d675"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get videos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5678/videos/1/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5678",
+							"path": [
+								"videos",
+								"1",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Example",
 			"request": {
 				"method": "GET",

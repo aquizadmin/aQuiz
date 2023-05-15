@@ -10,6 +10,7 @@ import usersRouter from "./routes/users.js";
 import gameRouter from "./routes/game.js";
 import questionsRouter from "./routes/questions.js";
 import booksRouter from "./routes/books.js";
+import videosRouter from "./routes/videos.js";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -24,6 +25,7 @@ app.use("/users", usersRouter);
 app.use("/game", gameRouter);
 app.use("/questions", questionsRouter);
 app.use("/books", booksRouter);
+app.use("/videos", videosRouter);
 
 await database.connect();
 
