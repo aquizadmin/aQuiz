@@ -49,6 +49,7 @@
               <v-row>
                 <v-col>
                   <NuxtLink
+                    to="/contactUs"
                     active-class="text-pink-darken-3"
                     class="text-white text-decoration-none"
                   >
