@@ -56,4 +56,4 @@ export const GAME = {
 export const COMMENT = {
   SEND_ONCE_PER: 1000 * 60 * 10,
   SEND_ONCE_PER_IN_TEXT: "10 minute",
-}
+};

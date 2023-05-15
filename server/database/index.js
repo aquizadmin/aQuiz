@@ -5,4 +5,4 @@ export const connect = async () => {
   mongoose.connect(`mongodb://${MONGODB.HOST}:${MONGODB.PORT}/${MONGODB.DATABASE.NAME}`, {
     useNewUrlParser: true,
   });
-}
+};

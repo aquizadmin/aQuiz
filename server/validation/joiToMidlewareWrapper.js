@@ -11,7 +11,7 @@ const joiMiddleware = (schema) => {
       await schema.validateAsync(payload);
       next();
     } catch (e) {
-      console.dir(e, {depth: null});
+      console.dir(e, { depth: null });
       const invalidKey = e.details[0].context.key;
       res.json(new ErrorResponseDTO(`${invalidKey} is not valid`));
     }

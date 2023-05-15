@@ -36,7 +36,7 @@ const addComment = async (req, res) => {
 
   if (lastComment) {
     const lastCommentCreatedAt = lastComment.createdAt.valueOf();
-    const diffBetween = (new Date) - lastCommentCreatedAt;
+    const diffBetween = new Date() - lastCommentCreatedAt;
     if (diffBetween < COMMENT.SEND_ONCE_PER) {
       return res.status(400).json(new ErrorResponseDTO(`Only one comment per ${COMMENT.SEND_ONCE_PER_IN_TEXT}`));
     }
@@ -45,8 +45,8 @@ const addComment = async (req, res) => {
   const newCommentData = {
     userId: req.user._id,
     comment: req.body.comment,
-  }
-  const comment = await commentsService.create(newCommentData)
+  };
+  const comment = await commentsService.create(newCommentData);
   res.status(200).json(new SuccessResponseDTO({ comment }));
 };
 
@@ -62,8 +62,7 @@ const getComments = async (req, res) => {
   });
 
   res.status(200).json(new SuccessResponseDTO({ comments, commentsCount, pagesCount }));
-}
-
+};
 
 export default {
   getUserByID,
