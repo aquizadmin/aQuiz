@@ -52,3 +52,8 @@ export const GAME = {
   QUESTION_MORE_THEN_TIME: 2,
   POINTS_PER_ANSWER: 100,
 };
+
+export const COMMENT = {
+  SEND_ONCE_PER: 1000 * 60 * 10,
+  SEND_ONCE_PER_IN_TEXT: "10 minute",
+}

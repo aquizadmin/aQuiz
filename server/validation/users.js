@@ -9,16 +9,26 @@ const UserByIdSchema = Joi.object({
   }),
 });
 
-const SendCommentSchema = Joi.object({
+const AddCommentSchema = Joi.object({
   body: Joi.object({
-    message: Joi.string().min(5).max(500).required(),
+    comment: Joi.string().min(5).max(500).required(),
+  })
+});
+
+const GetAllCommentsSchema = Joi.object({
+  params: Joi.object({
+    page: Joi.number().required(),
+    count: Joi.number().required(),
   })
 })
 
+
 const UserByIdValidation = joiMiddleware(UserByIdSchema);
-const SendCommentValidation = joiMiddleware(SendCommentSchema);
+const AddCommentValidation = joiMiddleware(AddCommentSchema);
+const GetCommentsValidation = joiMiddleware(GetAllCommentsSchema);
 
 export default {
   UserById: UserByIdValidation,
-  SendComment: SendCommentValidation,
+  AddComment: AddCommentValidation,
+  GetComments: GetCommentsValidation,
 };
