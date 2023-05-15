@@ -30,7 +30,7 @@
         aspect-ratio="1"
         :lazy-src="image"
         :cover="imageCoverFit"
-        class="ml-auto"
+        class="ml-auto rounded-lg"
       />
     </v-col>
   </v-row>
