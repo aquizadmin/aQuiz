@@ -28,7 +28,7 @@
           <v-col
             v-for="(page, index) in isLogged ? pages : nonLoggedPages"
             :key="index"
-            :class="!isLogged ? 'text-right' : ''"
+            :class="!isLogged ? 'text-right' : 'text-center'"
           >
             <NuxtLink
               :to="page.slug"
@@ -110,46 +110,48 @@ const router = useRouter()
 const isLogged = ref(false)
 
 const pages = ref(
-  [
-    { name: 'Home', slug: '/' },
-    { name: 'About us', slug: '/about' },
-    { name: 'Statistics', slug: '/statistics' },
-  ],
+    [
+        {name: 'Home', slug: '/'},
+        {name: 'About us', slug: '/about'},
+        {name: 'Statistics', slug: '/statistics'},
+        {name: 'Videos', slug: '/videos'},
+        {name: 'Books', slug: '/books'},
+    ],
 )
 
 const nonLoggedPages = ref(
-  [
-    { name: 'About us', slug: '/about' },
-  ]
+    [
+        {name: 'About us', slug: '/about'},
+    ]
 )
 
 
 const onRouteChange = async () => {
-  const token = localStorage.getItem('access-token')
+    const token = localStorage.getItem('access-token')
 
-  if (!!token || (token && ['undefined', 'null'].includes(token))) {
-    const {data: response, error:errorResponse} = await useFetchWithHeaders('/users/me', {
-      method: 'GET',
-    })
+    if (!!token || (token && ['undefined', 'null'].includes(token))) {
+        const {data: response, error: errorResponse} = await useFetchWithHeaders('/users/me', {
+            method: 'GET',
+        })
 
-    isLogged.value = response.value && !errorResponse.value
-  }
+        isLogged.value = response.value && !errorResponse.value
+    }
 }
 
 onRouteChange()
 
 const handleClick = () => {
-  router.push('/game')
+    router.push('/game')
 }
 
 const goToHome = () => {
-  router.push('/')
+    router.push('/')
 }
 
 const handleLogout = () => {
-  localStorage.removeItem('access-token')
-  isLogged.value = false
-  router.replace('/login')
+    localStorage.removeItem('access-token')
+    isLogged.value = false
+    router.replace('/login')
 }
 
 watch(() => route.name, onRouteChange)
