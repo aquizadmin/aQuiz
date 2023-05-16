@@ -133,7 +133,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"firstName\": \"Artur\", \"lastName\": \"Khachatryan\", \"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"ihatenpua\"}",
+							"raw": "{\"firstName\": \"Artur\", \"lastName\": \"Khachatryan\", \"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"123456\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"1234567\"}",
+							"raw": "{\"email\": \"arturkhachatryan@yopmail.com\", \"password\": \"123456\"}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,7 +490,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/books/1/5",
+							"raw": "http://localhost:5678/books/1/5/Linux",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -499,7 +499,8 @@
 							"path": [
 								"books",
 								"1",
-								"5"
+								"5",
+								"Linux"
 							]
 						}
 					},
@@ -536,7 +537,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5678/videos/1/5",
+							"raw": "http://localhost:5678/videos/1/5/JavaScript",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -545,7 +546,8 @@
 							"path": [
 								"videos",
 								"1",
-								"5"
+								"5",
+								"JavaScript"
 							]
 						}
 					},
@@ -578,7 +580,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NjI1YjVlOTNlZDc2MjNhNWVmOTcwNyIsImlhdCI6MTY4NDE2Nzc4NywiZXhwIjoxNjg0MTcxMzg3fQ.exQDkfVKNTkf059cqv9sTc8ccANNFY6ZUl30ri_pk-U",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0NjMyYjU3Mjk2MzczZjQyZDQ3M2RiYyIsImlhdCI6MTY4NDIyMDc4NiwiZXhwIjoxNjg0MjI0Mzg2fQ.iApwB_tOrP_n8VlqBv-ahMRIfvlaMOf4qzK58cfyYG0",
 				"type": "string"
 			}
 		]
