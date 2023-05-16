@@ -1,16 +1,16 @@
-const CLIENT = {
+export const CLIENT = {
   PROTOCOL: "http",
   HOST: "localhost",
   PORT: 3000,
 };
 
-const SERVER = {
+export const SERVER = {
   PROTOCOL: "http",
   HOST: "localhost",
   PORT: 5678,
 };
 
-const MONGODB = {
+export const MONGODB = {
   HOST: "localhost",
   PORT: "27017",
   DATABASE: {
@@ -18,7 +18,7 @@ const MONGODB = {
   },
 };
 
-const JWT = {
+export const JWT = {
   ACCESS_TOKEN: {
     SECRET: "SOMESecret",
     EXPIRED_IN_DEFAULT: 60 * 60, // 60 minute
@@ -34,11 +34,11 @@ const JWT = {
   },
 };
 
-const PASSWORD = {
+export const PASSWORD = {
   MD5SECRET: "VeryImportantSecret",
 };
 
-const MAILER = {
+export const MAILER = {
   HOST: "smtp.mail.ru",
   PORT: 465,
   SECURE: true,
@@ -48,9 +48,12 @@ const MAILER = {
   },
 };
 
-const GAME = {
+export const GAME = {
   QUESTION_MORE_THEN_TIME: 2,
   POINTS_PER_ANSWER: 100,
 };
 
-export { SERVER, CLIENT, MONGODB, JWT, PASSWORD, MAILER, GAME };
+export const COMMENT = {
+  SEND_ONCE_PER: 1000 * 60 * 10,
+  SEND_ONCE_PER_IN_TEXT: "10 minute",
+};

@@ -75,25 +75,24 @@
 
 <script setup>
 import {useFetchWithHeaders} from '~/hooks';
-import {ca} from "vuetify/locale";
 
 definePageMeta({
-  middleware: 'auth'
+    middleware: 'auth'
 })
 
 const router = useRouter()
 
 const {data: categories} = useFetchWithHeaders('/questions/getAllCategories', {
-  method: 'GET',
+    method: 'GET',
 })
 
 const formData = ref({duration: 30, category: 'Linux'})
 const durations = ref([30, 60, 90])
 const handleClick = () => {
-  const {duration, category} = formData.value;
+    const {duration, category} = formData.value;
 
-  localStorage.removeItem('results')
+    localStorage.removeItem('results')
 
-  router.push({path: '/game/play', query: {duration, category}});
+    router.push({path: '/game/play', query: {duration, category}});
 }
 </script>

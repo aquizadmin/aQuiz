@@ -3,8 +3,8 @@ import { fileURLToPath } from "url";
 import { createHash } from "node:crypto";
 import ejs from "ejs";
 
-import { SERVER, CLIENT } from "../config/index.js";
-import JWT from "../services/JWT.js";
+import { CLIENT } from "../config/index.js";
+import jwtService from "../services/JWT.js";
 import usersService from "../services/users.js";
 import mailerService from "../services/mailer.js";
 import { SuccessResponseDTO, ErrorResponseDTO } from "../DTO/index.js";
@@ -28,13 +28,13 @@ const login = async (req, res) => {
     email: req.body.email,
     password: md5Password,
   };
-  const select = { _id: 1 };
+  const select = { _id: 1, confirmed: 1 };
   const user = await usersService.getUser({ filter, select });
   if (!user) return res.status(401).json(new ErrorResponseDTO("There aren't any user with same data"));
 
-  if (!user.confirmed) if (!user) return res.status(401).json(new ErrorResponseDTO("Your account is not confirmed, please check your email"));
+  if (!user.confirmed) return res.status(401).json(new ErrorResponseDTO("Your account is not confirmed, please check your email"));
 
-  const accessToken = JWT.generateAccessToken({
+  const accessToken = jwtService.generateAccessToken({
     id: user._id,
     rememberMe: req.body.rememberMe,
   });
@@ -57,7 +57,7 @@ const registration = async (req, res) => {
   res.status(200).json(new SuccessResponseDTO());
 
   // send confirmation email
-  const accountConfirmationUrlToken = JWT.generateEmailConfirmToken({ _id: newUser._id });
+  const accountConfirmationUrlToken = jwtService.generateEmailConfirmToken({ _id: newUser._id });
   const accountConfirmationUrl = `${CLIENT.PROTOCOL}://${CLIENT.HOST}:${CLIENT.PORT}/confirmEmail/${accountConfirmationUrlToken}`;
   const templateData = { redirectUrl: accountConfirmationUrl };
   const templateUrl = `${__dirname}/../mailTemplates/confirmEmail.ejs`;
@@ -74,7 +74,7 @@ const registration = async (req, res) => {
 
 const confirmEmail = async (req, res) => {
   const token = req.body.token;
-  const tokenPayload = JWT.decodeEmailConfirmToken(token);
+  const tokenPayload = jwtService.decodeEmailConfirmToken(token);
   if (tokenPayload.error) return res.status(401).json(new ErrorResponseDTO("Invalid token"));
 
   const filter = { _id: tokenPayload.payload._id };
@@ -91,7 +91,7 @@ const resetPasswordMail = async (req, res) => {
   res.status(200).json(new SuccessResponseDTO());
 
   // send password reset email
-  const passwordResetUrlToken = JWT.generatePasswordResetToken({ email: req.body.email });
+  const passwordResetUrlToken = jwtService.generatePasswordResetToken({ email: req.body.email });
   const passwordResetUrl = `${CLIENT.PROTOCOL}://${CLIENT.HOST}:${CLIENT.PORT}/resetPassword/${passwordResetUrlToken}`;
   const templateData = { redirectUrl: passwordResetUrl };
   const templateUrl = `${__dirname}/../mailTemplates/resetPassword.ejs`;
@@ -107,8 +107,8 @@ const resetPasswordMail = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   const token = req.body.token;
-  const tokenPayload = JWT.decodePasswordResetToken(token);
-  const tokenPayloadWithoutExpiration = JWT.decodePasswordResetToken(token, {
+  const tokenPayload = jwtService.decodePasswordResetToken(token);
+  const tokenPayloadWithoutExpiration = jwtService.decodePasswordResetToken(token, {
     ignoreExpiration: true,
   });
   if (tokenPayload.error && tokenPayloadWithoutExpiration.error) return res.status(401).json(new ErrorResponseDTO("Invalid token"));
