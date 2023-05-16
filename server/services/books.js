@@ -8,8 +8,8 @@ const getBooks = ({ filter = {}, select = {}, skip = {}, limit = {}, sort = {} }
   return booksModel.find(filter).select(select).skip(skip).limit(limit).sort(sort);
 };
 
-const getCount = () => {
-  return booksModel.count();
+const getCount = ({ filter = {} } = {}) => {
+  return booksModel.countDocuments(filter);
 };
 
 export default {

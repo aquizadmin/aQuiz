@@ -7,6 +7,6 @@ const videosRouter = Router();
 
 videosRouter.use(authentication.authenticate);
 videosRouter.get("/:id", videosController.getVideo);
-videosRouter.get("/:page/:count", videosController.getVideos);
+videosRouter.get("/:page/:count/:category", videosController.getVideos);
 
 export default videosRouter;

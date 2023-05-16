@@ -16,11 +16,15 @@ const getBook = async (req, res) => {
 const getBooks = async (req, res) => {
   const page = Number(req.params.page) - 1;
   const count = Number(req.params.count);
-  const booksCount = await booksService.getCount();
-  const pagesCount = Math.ceil(booksCount / count);
+  const category = req.params.category;
 
+  const filter = {};
+  if (category) filter.category = category;
+
+  const booksCount = await booksService.getCount({ filter });
   const books = await booksService
     .getBooks({
+      filter: filter,
       skip: count * page,
       limit: count,
     })
@@ -31,7 +35,7 @@ const getBooks = async (req, res) => {
     book.imageURl = new URL(`/public/booksImages/${book.image}`, serverURL).href;
   });
 
-  console.log(books);
+  const pagesCount = Math.ceil(booksCount / count);
   res.status(200).json(new SuccessResponseDTO({ books, booksCount, pagesCount }));
 };
 

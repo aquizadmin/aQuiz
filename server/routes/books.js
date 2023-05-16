@@ -7,6 +7,6 @@ const booksRouter = Router();
 
 booksRouter.use(authentication.authenticate);
 booksRouter.get("/:id", booksController.getBook);
-booksRouter.get("/:page/:count", booksController.getBooks);
+booksRouter.get("/:page/:count/:category", booksController.getBooks);
 
 export default booksRouter;
