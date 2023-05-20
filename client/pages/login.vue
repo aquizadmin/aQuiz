@@ -356,7 +356,7 @@ const onSignIn = async () => {
     body: signInState.value,
     method: 'POST',
   })
-  
+
   if (errorResponse.value) {
     signInErrorResponse.value = errorResponse.value.data.message
     return
